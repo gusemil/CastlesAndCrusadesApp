@@ -42,14 +42,15 @@ public class Gems
         gemsSubtableDictionary.Add((99, 100), new GemsSubTable("Diamond, blood red ruby, blue sapphire", 5000));
     }
 
-    public void RollGemsSubTable(int gemValueAdjustment = 0)
+    public void RollGemsSubTable(int gemAmount, int gemValueAdjustment = 0)
     {
         int percentageRoll = CommonUtils.RollPercentage() + gemValueAdjustment;
         if (percentageRoll < 1) percentageRoll = 1;
-        KeyValuePair<(int, int), GemsSubTable> subTableEntry =
-            gemsSubtableDictionary.Where(x => percentageRoll >= x.Key.Item1 && percentageRoll <= x.Key.Item2).FirstOrDefault();
+        GemsSubTable subTableEntry =
+            gemsSubtableDictionary.Where(x => percentageRoll >= x.Key.Item1 && percentageRoll <= x.Key.Item2).FirstOrDefault().Value;
 
-        Console.WriteLine("Gems are " + subTableEntry.Value.description + " and have a gold piece value of " + subTableEntry.Value.gpValue);
+        Console.WriteLine(subTableEntry.description + " gems have a gold piece value of " + subTableEntry.gpValue
+            + " per gem. Total value of " + gemAmount + " such gems is " + gemAmount * subTableEntry.gpValue + " gold pieces");
     }
 }
 

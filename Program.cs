@@ -4,10 +4,10 @@ public class Program
     static void Main(string[] args)
     {
         bool mainLoop = true;
-        Console.WriteLine("Hello Castle Keeper!\n");
+        Console.WriteLine("Welcome, Castle Keeper!");
         while (mainLoop)
         {
-            Console.WriteLine("\nDo you want to choose or roll treasure level? C/R");
+            Console.WriteLine("\n\nDo you want to choose or roll treasure level? C/R");
             int treasureLevel;
             ConsoleKeyInfo input = Console.ReadKey();
             if (input.Key == ConsoleKey.C)
@@ -36,8 +36,12 @@ public class Program
             }
 
             //End
-            Console.WriteLine("Do you wish to end the application? Y/N\n");
-            if (Console.ReadKey().Key == ConsoleKey.Y) { break; }
+            Console.WriteLine("Do you wish to end the application? Y/N");
+            if (Console.ReadKey().Key == ConsoleKey.Y)
+            {
+                Console.WriteLine("");
+                break;
+            }
         }
     }
 
@@ -83,7 +87,7 @@ public class Program
         if (hasGems)
         {
             Console.WriteLine("Rolling gem subtable");
-            newGems.RollGemsSubTable();
+            newGems.RollGemsSubTable(gems);
 
         }
 
