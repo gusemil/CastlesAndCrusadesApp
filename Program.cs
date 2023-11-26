@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 class Program
 {
@@ -32,7 +28,6 @@ class Program
             }
             else if (input.Key == ConsoleKey.R)
             {
-                Console.WriteLine("Vittu");
                 treasureLevel = RollNumber(1, 18);
                 RollTreasure(treasureLevel);
             }
@@ -53,6 +48,7 @@ class Program
         Console.WriteLine("Invalid input. Please try again");
     }
 
+    //TODO: Obsolete. Remove later but keep it for now
     public static int RollNumber(int min, int max, int modifier = 0)
     {
         Random rnd = new Random();
@@ -114,7 +110,7 @@ class Program
     private static void RollTreasure(int treasureLevel)
     {
         RollCoins(treasureLevel);
-        //RollGems(treasureLevel);
+        RollGems(treasureLevel);
         //RollExtraOrdinaryItems(treasureLevel);
         //RollMagicItems(treasureLevel);
     }
@@ -136,6 +132,17 @@ class Program
 
     private static void RollGems(int treasureLevel)
     {
+        Gems newGems = new Gems();
+        int gemsDictIndex = treasureLevel - 1;
+        int chanceToHaveGems = newGems.coinsDictionary[gemsDictIndex].percentageChance;
+        bool hasGems = RollPercentageSuccess(chanceToHaveGems);
+        Console.WriteLine(chanceToHaveGems + "% chance of the treasure containing gems. Your result: " + hasGems);
+        int gems = 0;
+        if (hasGems)
+        {
+            gems = newGems.coinsDictionary[gemsDictIndex].gemsRoll.RollXdY();
+        }
+        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + gems + " gems");
 
     }
     private static void RollMagicItems(int treasureLevel)
@@ -147,5 +154,9 @@ class Program
     {
 
     }
+    #endregion
+
+    #region SubTables
+
     #endregion
 }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 public class Roll
 {
     private int x;
@@ -21,21 +16,29 @@ public class Roll
     public int RollXdY()
     {
         int roll = 0;
+        int unadjustedRoll = 0;
         Random rnd = new Random();
         for (int i = 0; i < x; i++)
         {
             roll += rnd.Next(1, y);
         }
 
+        unadjustedRoll = roll;
+
         if (modifier > 0)
         {
             roll += modifier;
         }
 
-        if (multiplier > 0)
+        if (roll < 0) roll = 0;
+
+        if (multiplier > 0 && roll != 0)
         {
             roll *= multiplier;
         }
+
+        Console.WriteLine("Rolling " + x + "d" + y + " results in " + unadjustedRoll + " adding modifier " + modifier +
+            " and multiplier " + multiplier + " Result: " + roll);
 
         return roll;
     }
