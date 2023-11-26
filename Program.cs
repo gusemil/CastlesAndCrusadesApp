@@ -33,7 +33,7 @@ class Program
             else if (input.Key == ConsoleKey.R)
             {
                 Console.WriteLine("Vittu");
-                treasureLevel = RollNumber(1,18);
+                treasureLevel = RollNumber(1, 18);
                 RollTreasure(treasureLevel);
             }
             else
@@ -43,7 +43,7 @@ class Program
 
             //End
             Console.WriteLine("Do you wish to end the application? Y/N");
-            if(Console.ReadKey().Key == ConsoleKey.Y) { break; }
+            if (Console.ReadKey().Key == ConsoleKey.Y) { break; }
         }
     }
 
@@ -57,7 +57,7 @@ class Program
     {
         Random rnd = new Random();
         int roll = rnd.Next(min, max);
-        if(modifier > 0)
+        if (modifier > 0)
         {
             roll += modifier;
         }
@@ -66,6 +66,7 @@ class Program
         return roll;
     }
 
+    /*
     public static int RollXdY(int x, int y, int modifier = 0, int multiplier = 0)
     {
         int roll = 0;
@@ -87,11 +88,12 @@ class Program
 
         return roll;
     }
+    */
 
     public static int RollPercentage()
     {
         Random rnd = new Random();
-        int roll = rnd.Next(1,100);
+        int roll = rnd.Next(1, 100);
         return roll;
     }
 
@@ -119,16 +121,17 @@ class Program
 
     private static void RollCoins(int treasureLevel)
     {
-        if(treasureLevel == 1)
+        Coins newCoins = new Coins();
+        int coinsDictIndex = treasureLevel - 1;
+        int chanceToHaveCoins = newCoins.coinsDictionary[coinsDictIndex].percentageChance;
+        bool hasCoins = RollPercentageSuccess(chanceToHaveCoins);
+        Console.WriteLine(chanceToHaveCoins + "% chance of the treasure containing gold coins. Your result: " + hasCoins);
+        int coins = 0;
+        if (hasCoins)
         {
-            bool coinChance = RollPercentageSuccess(50);
-            int coins = 0;
-            if (coinChance)
-            {
-                coins = RollXdY(2, 4, 0, 10);
-            }
-            Console.WriteLine("The treasure contains " + coins + " gold pieces");
+            coins = newCoins.coinsDictionary[coinsDictIndex].coinsRoll.RollXdY();
         }
+        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + coins + " gold pieces");
     }
 
     private static void RollGems(int treasureLevel)
