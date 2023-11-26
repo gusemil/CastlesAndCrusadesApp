@@ -1,0 +1,7 @@
+C:\Users\GusEm\Documents\MyC#Projects\CastlesAndCrusadesApp\CastlesAndCrusadesApp\bin\Debug\CastlesAndCrusadesApp.exe.config
+C:\Users\GusEm\Documents\MyC#Projects\CastlesAndCrusadesApp\CastlesAndCrusadesApp\bin\Debug\CastlesAndCrusadesApp.exe
+C:\Users\GusEm\Documents\MyC#Projects\CastlesAndCrusadesApp\CastlesAndCrusadesApp\bin\Debug\CastlesAndCrusadesApp.pdb
+C:\Users\GusEm\Documents\MyC#Projects\CastlesAndCrusadesApp\CastlesAndCrusadesApp\obj\Debug\CastlesAndCrusadesApp.csproj.AssemblyReference.cache
+C:\Users\GusEm\Documents\MyC#Projects\CastlesAndCrusadesApp\CastlesAndCrusadesApp\obj\Debug\CastlesAndCrusadesApp.csproj.CoreCompileInputs.cache
+C:\Users\GusEm\Documents\MyC#Projects\CastlesAndCrusadesApp\CastlesAndCrusadesApp\obj\Debug\CastlesAndCrusadesApp.exe
+C:\Users\GusEm\Documents\MyC#Projects\CastlesAndCrusadesApp\CastlesAndCrusadesApp\obj\Debug\CastlesAndCrusadesApp.pdb
