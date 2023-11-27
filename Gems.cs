@@ -4,11 +4,14 @@ using System;
 
 public class Gems
 {
-    public Dictionary<int, GemsTable> gemsDictionary = new Dictionary<int, GemsTable>();
-    private Dictionary<(int, int), GemsSubTable> gemsSubtableDictionary = new Dictionary<(int, int), GemsSubTable>();
+    public Dictionary<int, GemsTable> gemsDictionary = null;
+    private Dictionary<(int, int), GemsSubTable> gemsSubtableDictionary = null;
 
     public Gems()
     {
+        if (gemsDictionary != null) return;
+
+        gemsDictionary = new Dictionary<int, GemsTable>();
         //Init table entries
         gemsDictionary.Add(0, new GemsTable(10, new Roll(1, 4, 0), -10));
         gemsDictionary.Add(1, new GemsTable(20, new Roll(1, 4, 1), -8));
@@ -32,6 +35,10 @@ public class Gems
 
     public void InitGemsSubtable()
     {
+        if (gemsSubtableDictionary != null) return;
+
+        gemsSubtableDictionary = new Dictionary<(int, int), GemsSubTable>();
+
         gemsSubtableDictionary.Add((1, 10), new GemsSubTable("'Amber, amethyst, jadeite'", 5));
         gemsSubtableDictionary.Add((11, 20), new GemsSubTable("'Precious opal, banded eye, malachite'", 10));
         gemsSubtableDictionary.Add((21, 40), new GemsSubTable("'Moonstone, pearl, lapis lazuli, tiger eye'", 25));
