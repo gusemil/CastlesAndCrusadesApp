@@ -46,6 +46,8 @@ public class Gems
 
     public void RollGemsSubTable(int gemAmount, int gemValueAdjustment = 0)
     {
+        int totalGemValue = 0;
+        Dictionary<string, int> totalGemsDict = new Dictionary<string, int>();
         for(int i=0; i < gemAmount; i++)
         {
             int percentageRoll = CommonUtils.RollPercentage() + gemValueAdjustment;
@@ -54,7 +56,22 @@ public class Gems
                 gemsSubtableDictionary.Where(x => percentageRoll >= x.Key.Item1 && percentageRoll <= x.Key.Item2).FirstOrDefault().Value;
 
             Console.WriteLine(subTableEntry.description + " gem has a gold piece value of " + subTableEntry.gpValue);
+            if (!totalGemsDict.ContainsKey(subTableEntry.description))
+            {
+                totalGemsDict.Add(subTableEntry.description, 0);
+            }
+            else
+            {
+                totalGemsDict[subTableEntry.description] += 1;
+            }
+            totalGemValue += subTableEntry.gpValue;
         }
+
+        for(int i=0; i < totalGemsDict.Count; i++)
+        {
+            //TODO: Iterate over all gems in dictionary
+        }
+        Console.WriteLine("\n\nTotal value of all " + gemAmount + " gems is: " + totalGemValue);
 
         //Console.WriteLine(subTableEntry.description + " gems have a gold piece value of " + subTableEntry.gpValue
           //  + " per gem. Total value of " + gemAmount + " such gems is " + gemAmount * subTableEntry.gpValue + " gold pieces");
