@@ -9,6 +9,7 @@ public class ExtraOrdinaryItems
     public Dictionary<int, ExtraOrdinaryItemsTable> extraOrdinaryItemsDictionary = null;
     private Dictionary<(int, int), ExtraOrdinaryItemType> itemTypeDictionary = null;
     private Dictionary<(int, int), Item> expertWeaponsDictionary = null;
+    private Dictionary<(int, int), Item> jewelryDictionary = null;
 
     public ExtraOrdinaryItems()
     {
@@ -74,7 +75,28 @@ public class ExtraOrdinaryItems
 
     private void InitJewelry()
     {
-
+        if (jewelryDictionary != null) return;
+        jewelryDictionary = new Dictionary<(int, int), Item>();
+        jewelryDictionary.Add((1, 5), new Item("'Arrow'", 1));
+        jewelryDictionary.Add((6, 10), new Item("'Battle Axe'", 100));
+        jewelryDictionary.Add((11, 15), new Item("'Bolt'", 12, "'Gp value in sp'"));
+        jewelryDictionary.Add((16, 20), new Item("'Bow'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((21, 25), new Item("'Crossbow'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((26, 30), new Item("'Dagger'", 20));
+        jewelryDictionary.Add((31, 35), new Item("'Dart'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((36, 40), new Item("'Flail'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((41, 45), new Item("'Halberd'", 100));
+        jewelryDictionary.Add((46, 50), new Item("'Hammer'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((51, 55), new Item("'Hand Axe'", 40));
+        jewelryDictionary.Add((56, 60), new Item("'Javelin'", 10));
+        jewelryDictionary.Add((61, 65), new Item("'Lance'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((66, 70), new Item("'Mace'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((71, 75), new Item("'Morningstar'", 80));
+        jewelryDictionary.Add((76, 80), new Item("'Scimitar'", 150));
+        jewelryDictionary.Add((81, 85), new Item("'Spear'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((86, 90), new Item("'Sword'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        jewelryDictionary.Add((91, 95), new Item("'Trident'", 100));
+        jewelryDictionary.Add((96, 100), new Item("'Two-Handed Axe'", 300));
     }
 
     private void RollExpertWeapon()
