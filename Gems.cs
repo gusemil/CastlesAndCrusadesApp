@@ -5,7 +5,7 @@ using System;
 public class Gems
 {
     public Dictionary<int, GemsTable> gemsDictionary = new Dictionary<int, GemsTable>();
-    public Dictionary<(int, int), GemsSubTable> gemsSubtableDictionary = new Dictionary<(int, int), GemsSubTable>();
+    private Dictionary<(int, int), GemsSubTable> gemsSubtableDictionary = new Dictionary<(int, int), GemsSubTable>();
 
     public Gems()
     {
@@ -28,8 +28,10 @@ public class Gems
         gemsDictionary.Add(15, new GemsTable(97, new Roll(1, 10, 9)));
         gemsDictionary.Add(16, new GemsTable(98, new Roll(1, 12, 8)));
         gemsDictionary.Add(17, new GemsTable(99, new Roll(1, 12, 9)));
+    }
 
-        //Init Gems Subtable
+    public void InitGemsSubtable()
+    {
         gemsSubtableDictionary.Add((1, 10), new GemsSubTable("'Amber, amethyst, jadeite'", 5));
         gemsSubtableDictionary.Add((11, 20), new GemsSubTable("'Precious opal, banded eye, malachite'", 10));
         gemsSubtableDictionary.Add((21, 40), new GemsSubTable("'Moonstone, pearl, lapis lazuli, tiger eye'", 25));
@@ -52,30 +54,30 @@ public class Gems
         Console.WriteLine(subTableEntry.description + " gems have a gold piece value of " + subTableEntry.gpValue
             + " per gem. Total value of " + gemAmount + " such gems is " + gemAmount * subTableEntry.gpValue + " gold pieces");
     }
-}
 
-public struct GemsTable
-{
-    public int percentageChance;
-    public Roll gemsRoll;
-    public int gemValueAdjustment;
-
-    public GemsTable(int percentageChance, Roll gemsRoll, int gemValueAdjustment = 0)
+    public struct GemsTable
     {
-        this.percentageChance = percentageChance;
-        this.gemsRoll = gemsRoll;
-        this.gemValueAdjustment = gemValueAdjustment;
+        public int percentageChance;
+        public Roll gemsRoll;
+        public int gemValueAdjustment;
+
+        public GemsTable(int percentageChance, Roll gemsRoll, int gemValueAdjustment = 0)
+        {
+            this.percentageChance = percentageChance;
+            this.gemsRoll = gemsRoll;
+            this.gemValueAdjustment = gemValueAdjustment;
+        }
     }
-}
 
-public struct GemsSubTable
-{
-    public string description;
-    public int gpValue;
-
-    public GemsSubTable(string description, int gpValue)
+    private struct GemsSubTable
     {
-        this.description = description;
-        this.gpValue = gpValue;
+        public string description;
+        public int gpValue;
+
+        public GemsSubTable(string description, int gpValue)
+        {
+            this.description = description;
+            this.gpValue = gpValue;
+        }
     }
 }

@@ -50,6 +50,10 @@ public static class CommonUtils
     }
     */
 
+    public static void PageBreak()
+    {
+        Console.WriteLine("\n-------------------------------------------------\n");
+    }
     public static int RollPercentage()
     {
         Random rnd = new Random();

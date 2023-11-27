@@ -57,6 +57,7 @@ public class Program
 
     private static void RollCoins(int treasureLevel)
     {
+        CommonUtils.PageBreak();
         Coins newCoins = new Coins();
         int coinsDictIndex = treasureLevel - 1;
         int chanceToHaveCoins = newCoins.coinsDictionary[coinsDictIndex].percentageChance;
@@ -72,6 +73,7 @@ public class Program
 
     private static void RollGems(int treasureLevel)
     {
+        CommonUtils.PageBreak();
         Gems newGems = new Gems();
         int gemsDictIndex = treasureLevel - 1;
         int chanceToHaveGems = newGems.gemsDictionary[gemsDictIndex].percentageChance;
@@ -80,6 +82,7 @@ public class Program
         int gems = 0;
         if (hasGems)
         {
+            newGems.InitGemsSubtable();
             gems = newGems.gemsDictionary[gemsDictIndex].gemsRoll.RollXdY();
         }
         Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + gems + " gems");
@@ -95,9 +98,20 @@ public class Program
 
     private static void RollExtraOrdinaryItems(int treasureLevel)
     {
-        ExtraOrdinaryItems extraOrdinaryItems = new ExtraOrdinaryItems();
-        extraOrdinaryItems.RollItemType();
-
+        CommonUtils.PageBreak();
+        ExtraOrdinaryItems newItems = new ExtraOrdinaryItems();
+        int gemsDictIndex = treasureLevel - 1;
+        int chanceToHaveGems = newItems.extraOrdinaryItemsDictionary[gemsDictIndex].percentageChance;
+        bool hasItems = CommonUtils.RollPercentageSuccess(chanceToHaveGems);
+        Console.WriteLine(chanceToHaveGems + "% chance of the treasure containing extraordinary items. Your result: " + hasItems);
+        int items = 0;
+        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + items + " extraordinary item");
+        if (hasItems)
+        {
+            Console.Write("Rolling extraordinary item type");
+            newItems.RollItemType();
+            items = newItems.extraOrdinaryItemsDictionary[gemsDictIndex].itemsRoll.RollXdY();
+        }
     }
 
     private static void RollMagicItems(int treasureLevel)
