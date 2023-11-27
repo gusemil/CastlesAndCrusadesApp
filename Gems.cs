@@ -30,16 +30,16 @@ public class Gems
         gemsDictionary.Add(17, new GemsTable(99, new Roll(1, 12, 9)));
 
         //Init Gems Subtable
-        gemsSubtableDictionary.Add((1, 10), new GemsSubTable("Amber, amethyst, jadeite", 5));
-        gemsSubtableDictionary.Add((11, 20), new GemsSubTable("Precious opal, banded eye, malachite", 10));
-        gemsSubtableDictionary.Add((21, 40), new GemsSubTable("Moonstone, pearl, lapis lazuli, tiger eye", 25));
-        gemsSubtableDictionary.Add((41, 60), new GemsSubTable("Bloodstone, white agate, violet-blue sapphire", 50));
-        gemsSubtableDictionary.Add((61, 75), new GemsSubTable("Whitish moonstone, common opal", 100));
-        gemsSubtableDictionary.Add((76, 85), new GemsSubTable("Green nephrite, peridot, amethyst", 250));
-        gemsSubtableDictionary.Add((86, 90), new GemsSubTable("Violet or green garnet, fire opal, topaz", 500));
-        gemsSubtableDictionary.Add((91, 94), new GemsSubTable("Emerald, black opal, tourmaline", 1000));
-        gemsSubtableDictionary.Add((95, 98), new GemsSubTable("Star ruby, sapphire (other than blue", 2500));
-        gemsSubtableDictionary.Add((99, 100), new GemsSubTable("Diamond, blood red ruby, blue sapphire", 5000));
+        gemsSubtableDictionary.Add((1, 10), new GemsSubTable("'Amber, amethyst, jadeite'", 5));
+        gemsSubtableDictionary.Add((11, 20), new GemsSubTable("'Precious opal, banded eye, malachite'", 10));
+        gemsSubtableDictionary.Add((21, 40), new GemsSubTable("'Moonstone, pearl, lapis lazuli, tiger eye'", 25));
+        gemsSubtableDictionary.Add((41, 60), new GemsSubTable("'Bloodstone, white agate, violet-blue sapphire'", 50));
+        gemsSubtableDictionary.Add((61, 75), new GemsSubTable("'Whitish moonstone, common opal'", 100));
+        gemsSubtableDictionary.Add((76, 85), new GemsSubTable("'Green nephrite, peridot, amethyst'", 250));
+        gemsSubtableDictionary.Add((86, 90), new GemsSubTable("'Violet or green garnet, fire opal, topaz'", 500));
+        gemsSubtableDictionary.Add((91, 94), new GemsSubTable("'Emerald, black opal, tourmaline'", 1000));
+        gemsSubtableDictionary.Add((95, 98), new GemsSubTable("'Star ruby, sapphire (other than blue'", 2500));
+        gemsSubtableDictionary.Add((99, 100), new GemsSubTable("'Diamond, blood red ruby, blue sapphire'", 5000));
     }
 
     public void RollGemsSubTable(int gemAmount, int gemValueAdjustment = 0)

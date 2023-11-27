@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Coins.cs" />
     <Compile Include="CommonUtils.cs" />
+    <Compile Include="ExtraOrdinaryItems.cs" />
     <Compile Include="Gems.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

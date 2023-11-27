@@ -51,7 +51,7 @@ public class Program
     {
         RollCoins(treasureLevel);
         RollGems(treasureLevel);
-        //RollExtraOrdinaryItems(treasureLevel);
+        RollExtraOrdinaryItems(treasureLevel);
         //RollMagicItems(treasureLevel);
     }
 
@@ -92,12 +92,15 @@ public class Program
         }
 
     }
-    private static void RollMagicItems(int treasureLevel)
+
+    private static void RollExtraOrdinaryItems(int treasureLevel)
     {
+        ExtraOrdinaryItems extraOrdinaryItems = new ExtraOrdinaryItems();
+        extraOrdinaryItems.RollItemType();
 
     }
 
-    private static void RollExtraOrdinaryItems(int treasureLevel)
+    private static void RollMagicItems(int treasureLevel)
     {
 
     }
