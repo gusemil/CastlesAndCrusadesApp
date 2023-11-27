@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 public static class CommonUtils
 {
-    #region General Methods
     public static void InvalidInput()
     {
         Console.WriteLine("\nInvalid input. Please try again");
@@ -25,30 +24,6 @@ public static class CommonUtils
 
         return roll;
     }
-
-    /*
-    public static int RollXdY(int x, int y, int modifier = 0, int multiplier = 0)
-    {
-        int roll = 0;
-        Random rnd = new Random();
-        for (int i = 0; i < x; i++)
-        {
-            roll += rnd.Next(1, y);
-        }
-
-        if (modifier > 0)
-        {
-            roll += modifier;
-        }
-
-        if(multiplier > 0)
-        {
-            roll *= multiplier;
-        }
-
-        return roll;
-    }
-    */
 
     public static void PageBreak()
     {
@@ -72,7 +47,6 @@ public static class CommonUtils
         }
         return result;
     }
-    #endregion
 }
 
 
