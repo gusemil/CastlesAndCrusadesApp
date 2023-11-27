@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 public class ExtraOrdinaryItems
 {
-    public Dictionary<int, ExtraOrdinaryItemsTable> extraOrdinaryItemsDictionary = new Dictionary<int, ExtraOrdinaryItemsTable>();
-    private Dictionary<(int, int), ExtraOrdinaryItemType> itemTypeDictionary = new Dictionary<(int, int), ExtraOrdinaryItemType>();
-    private Dictionary<(int, int), Item> expertWeaponsDictionary = new Dictionary<(int, int), Item>();
+    public Dictionary<int, ExtraOrdinaryItemsTable> extraOrdinaryItemsDictionary = null;
+    private Dictionary<(int, int), ExtraOrdinaryItemType> itemTypeDictionary = null;
+    private Dictionary<(int, int), Item> expertWeaponsDictionary = null;
 
     public ExtraOrdinaryItems()
     {
+        extraOrdinaryItemsDictionary = new Dictionary<int, ExtraOrdinaryItemsTable>();
         //Init table entries
         extraOrdinaryItemsDictionary.Add(0, new ExtraOrdinaryItemsTable(10, new Roll(1, 2, 0)));
         extraOrdinaryItemsDictionary.Add(1, new ExtraOrdinaryItemsTable(20, new Roll(1, 2, 1)));
@@ -35,6 +36,7 @@ public class ExtraOrdinaryItems
 
     private void InitExtraOrdinaryItems()
     {
+        itemTypeDictionary = new Dictionary<(int, int), ExtraOrdinaryItemType>();
         itemTypeDictionary.Add((1, 4), new ExtraOrdinaryItemType(0, "'Expert Weapons'"));
         itemTypeDictionary.Add((5, 8), new ExtraOrdinaryItemType(1, "'Jewelry'"));
         itemTypeDictionary.Add((9, 12), new ExtraOrdinaryItemType(2, "'Worn & Ceremonial Items'"));
@@ -42,8 +44,9 @@ public class ExtraOrdinaryItems
         itemTypeDictionary.Add((17, 20), new ExtraOrdinaryItemType(4, "'Antiquities'"));
     }
 
-    private void InitExpertWeapon()
+    private void InitExpertWeapons()
     {
+        expertWeaponsDictionary = new Dictionary<(int, int), Item>();
         expertWeaponsDictionary.Add((1, 5), new Item("'Arrow'", 1));
         expertWeaponsDictionary.Add((6, 10), new Item("'Battle Axe'", 100));
         expertWeaponsDictionary.Add((11, 15), new Item("'Bolt'", 12, "'Gp value in sp'"));
@@ -73,30 +76,36 @@ public class ExtraOrdinaryItems
 
     private void RollExpertWeapon()
     {
+        Console.WriteLine("No dict");
+        if (expertWeaponsDictionary == null) InitExpertWeapons();
+        Console.WriteLine("is dict");
+
         int roll = CommonUtils.RollPercentage();
-        InitExpertWeapon();
         Item expertWeapon = expertWeaponsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Console.WriteLine("Rolled " + roll + " for extraordinary weapon type which is... ");
         expertWeapon.PrintInfo();
     }
 
-    public void RollItemType()
+    public void RollItemType(int itemsAmount)
     {
-        int roll = CommonUtils.RollNumber(1, 20);
         InitExtraOrdinaryItems();
-        ExtraOrdinaryItemType itemType = itemTypeDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
-
-        Console.WriteLine("Rolled " + roll + " for extraordinary item type which is " + itemType.subTableDescription + " and table index " + itemType.subTableIndex);
-
-        switch (itemType.subTableIndex)
+        for (int i = 0; i < itemsAmount; i++)
         {
-            case 0:
-                RollExpertWeapon();
-                break;
-            default:
-                RollExpertWeapon();
-                //Console.WriteLine("Something went wrong");
-                break;
+            int roll = CommonUtils.RollNumber(1, 20);
+            ExtraOrdinaryItemType itemType = itemTypeDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+
+            Console.WriteLine("Rolled " + roll + " for extraordinary item type which is " + itemType.subTableDescription + " and table index " + itemType.subTableIndex);
+
+            switch (itemType.subTableIndex)
+            {
+                case 0:
+                    RollExpertWeapon();
+                    break;
+                default:
+                    RollExpertWeapon();
+                    //Console.WriteLine("Something went wrong");
+                    break;
+            }
         }
     }
 

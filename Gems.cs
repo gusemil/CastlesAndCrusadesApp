@@ -46,13 +46,18 @@ public class Gems
 
     public void RollGemsSubTable(int gemAmount, int gemValueAdjustment = 0)
     {
-        int percentageRoll = CommonUtils.RollPercentage() + gemValueAdjustment;
-        if (percentageRoll < 1) percentageRoll = 1;
-        GemsSubTable subTableEntry =
-            gemsSubtableDictionary.Where(x => percentageRoll >= x.Key.Item1 && percentageRoll <= x.Key.Item2).FirstOrDefault().Value;
+        for(int i=0; i < gemAmount; i++)
+        {
+            int percentageRoll = CommonUtils.RollPercentage() + gemValueAdjustment;
+            if (percentageRoll < 1) percentageRoll = 1;
+            GemsSubTable subTableEntry =
+                gemsSubtableDictionary.Where(x => percentageRoll >= x.Key.Item1 && percentageRoll <= x.Key.Item2).FirstOrDefault().Value;
 
-        Console.WriteLine(subTableEntry.description + " gems have a gold piece value of " + subTableEntry.gpValue
-            + " per gem. Total value of " + gemAmount + " such gems is " + gemAmount * subTableEntry.gpValue + " gold pieces");
+            Console.WriteLine(subTableEntry.description + " gem has a gold piece value of " + subTableEntry.gpValue);
+        }
+
+        //Console.WriteLine(subTableEntry.description + " gems have a gold piece value of " + subTableEntry.gpValue
+          //  + " per gem. Total value of " + gemAmount + " such gems is " + gemAmount * subTableEntry.gpValue + " gold pieces");
     }
 
     public struct GemsTable

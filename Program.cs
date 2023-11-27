@@ -79,19 +79,18 @@ public class Program
         int chanceToHaveGems = newGems.gemsDictionary[gemsDictIndex].percentageChance;
         bool hasGems = CommonUtils.RollPercentageSuccess(chanceToHaveGems);
         Console.WriteLine(chanceToHaveGems + "% chance of the treasure containing gems. Your result: " + hasGems);
-        int gems = 0;
+        int gemsAmount = 0;
         if (hasGems)
         {
             newGems.InitGemsSubtable();
-            gems = newGems.gemsDictionary[gemsDictIndex].gemsRoll.RollXdY();
+            gemsAmount = newGems.gemsDictionary[gemsDictIndex].gemsRoll.RollXdY();
         }
-        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + gems + " gems");
+        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + gemsAmount + " gems");
 
         if (hasGems)
         {
-            Console.WriteLine("Rolling gem subtable");
-            newGems.RollGemsSubTable(gems);
-
+            Console.WriteLine("Rolling gem subtable for " + gemsAmount + " gems");
+            newGems.RollGemsSubTable(gemsAmount);
         }
 
     }
@@ -104,13 +103,13 @@ public class Program
         int chanceToHaveGems = newItems.extraOrdinaryItemsDictionary[gemsDictIndex].percentageChance;
         bool hasItems = CommonUtils.RollPercentageSuccess(chanceToHaveGems);
         Console.WriteLine(chanceToHaveGems + "% chance of the treasure containing extraordinary items. Your result: " + hasItems);
-        int items = 0;
-        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + items + " extraordinary item");
+        int itemsAmount = 0;
+        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + itemsAmount + " extraordinary item");
         if (hasItems)
         {
-            Console.Write("Rolling extraordinary item type");
-            newItems.RollItemType();
-            items = newItems.extraOrdinaryItemsDictionary[gemsDictIndex].itemsRoll.RollXdY();
+            Console.Write("Rolling extraordinary item type for " + itemsAmount + " items");
+            itemsAmount = newItems.extraOrdinaryItemsDictionary[gemsDictIndex].itemsRoll.RollXdY();
+            newItems.RollItemType(itemsAmount);
         }
     }
 
