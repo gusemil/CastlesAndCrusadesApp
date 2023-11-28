@@ -10,13 +10,26 @@ public class Item
     public int gpValue;
     public string description;
     public int pageNumber;
+    public bool isRollValueTable;
+    public ValueTable.ValueTableEntry material; //if ValueTable applies
+    //TODO: Store material for later use?
+    //public ValueTable.ValueTableEntry material;
 
-    public Item(string name, int gpValue, string description = "", int pageNumber = 0)
+    public Item(string name, int gpValue, string description = "", int pageNumber = 0, bool rollValueTable = false)
     {
         this.name = name;
         this.gpValue = gpValue;
         this.description = description;
         this.pageNumber = pageNumber;
+        this.isRollValueTable = rollValueTable;
+    }
+
+    public void RollValueTable()
+    {
+        if (this.isRollValueTable)
+        {
+            this.material = ValueTable.RollValueTable(this.gpValue);
+        }
     }
 
     public void PrintInfo()

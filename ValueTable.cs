@@ -41,12 +41,20 @@ public static class ValueTable
         valueTableDictionary.Add((100, 100), new ValueTableEntry("'Mithril'",50000));
     }
 
-    public static void RollValueTable()
+    public static ValueTable.ValueTableEntry RollValueTable(int baseGoldValueOfItem = 0)
     {
-        //TODO:
+        InitValueTable();
+        int roll = CommonUtils.RollPercentage();
+        //TODO: replace this with commonutils method later
+        ValueTableEntry tableEntry = valueTableDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Console.WriteLine("Rolled value table: " + roll + " which equals: " + tableEntry.description + " which has an average gold value of " + tableEntry.gpValue);
+        //int valueModifier = tableEntry.gpValue + baseGoldValueOfItem;
+        ValueTableEntry material = new ValueTableEntry(tableEntry.description, tableEntry.gpValue);
+        return material;
+        
     }
 
-    private struct ValueTableEntry
+    public struct ValueTableEntry
     {
         public string description;
         public int gpValue;

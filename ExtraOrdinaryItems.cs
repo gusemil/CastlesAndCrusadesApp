@@ -77,26 +77,27 @@ public class ExtraOrdinaryItems
     {
         if (jewelryDictionary != null) return;
         jewelryDictionary = new Dictionary<(int, int), Item>();
-        jewelryDictionary.Add((1, 5), new Item("'Arrow'", 1));
-        jewelryDictionary.Add((6, 10), new Item("'Battle Axe'", 100));
-        jewelryDictionary.Add((11, 15), new Item("'Bolt'", 12, "'Gp value in sp'"));
-        jewelryDictionary.Add((16, 20), new Item("'Bow'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((21, 25), new Item("'Crossbow'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((26, 30), new Item("'Dagger'", 20));
-        jewelryDictionary.Add((31, 35), new Item("'Dart'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((36, 40), new Item("'Flail'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((41, 45), new Item("'Halberd'", 100));
-        jewelryDictionary.Add((46, 50), new Item("'Hammer'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((51, 55), new Item("'Hand Axe'", 40));
-        jewelryDictionary.Add((56, 60), new Item("'Javelin'", 10));
-        jewelryDictionary.Add((61, 65), new Item("'Lance'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((66, 70), new Item("'Mace'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((71, 75), new Item("'Morningstar'", 80));
-        jewelryDictionary.Add((76, 80), new Item("'Scimitar'", 150));
-        jewelryDictionary.Add((81, 85), new Item("'Spear'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((86, 90), new Item("'Sword'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        jewelryDictionary.Add((91, 95), new Item("'Trident'", 100));
-        jewelryDictionary.Add((96, 100), new Item("'Two-Handed Axe'", 300));
+        //gp value of all is based on the value table
+        jewelryDictionary.Add((1, 5), new Item("'Ankle Chain'", 0, "", 0, true));
+        jewelryDictionary.Add((6, 10), new Item("'Arm Band'", 0, "", 0, true));
+        jewelryDictionary.Add((11, 15), new Item("'Belt'", 0, "", 0, true));
+        jewelryDictionary.Add((16, 20), new Item("'Bracelet'", 0, "", 0, true));
+        jewelryDictionary.Add((21, 25), new Item("'Broach'", 0, "", 0, true));
+        jewelryDictionary.Add((26, 30), new Item("'Buckle'", 0, "", 0, true));
+        jewelryDictionary.Add((31, 35), new Item("'Button'", 0, "'2-4 buttons, each button 1gp worth'", 0, true));
+        jewelryDictionary.Add((36, 40), new Item("'Collar'", 0, "", 0, true));
+        jewelryDictionary.Add((41, 45), new Item("'Choker'", 0, "", 0, true));
+        jewelryDictionary.Add((46, 50), new Item("'Earrings'", 0, "", 0, true));
+        jewelryDictionary.Add((51, 55), new Item("'Locket'", 0, "", 0, true));
+        jewelryDictionary.Add((56, 60), new Item("'Medallion'", 0, "", 0, true));
+        jewelryDictionary.Add((61, 65), new Item("'Necklace'", 0, "", 0, true));
+        jewelryDictionary.Add((66, 70), new Item("'Pendant'", 0, "", 0, true));
+        jewelryDictionary.Add((71, 75), new Item("'Ring'", 0, "", 0, true));
+        jewelryDictionary.Add((76, 80), new Item("'Stud'", 0, "", 0, true));
+        jewelryDictionary.Add((81, 85), new Item("'Tiara'", 0, "", 0, true));
+        jewelryDictionary.Add((86, 90), new Item("'Toe Ring'", 0, "", 0, true));
+        jewelryDictionary.Add((91, 95), new Item("'Torque'", 0, "", 0, true));
+        jewelryDictionary.Add((96, 100), new Item("'Waist Chain'", 0, "", 0, true));
     }
 
     private void RollExpertWeapon()
@@ -106,6 +107,16 @@ public class ExtraOrdinaryItems
         Item expertWeapon = expertWeaponsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Console.WriteLine("Rolled " + roll + " for extraordinary weapon type which is... ");
         expertWeapon.PrintInfo();
+    }
+
+    private void RollJewerlry()
+    {
+        InitJewelry();
+        int roll = CommonUtils.RollPercentage();
+        Item jewelry = jewelryDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Console.WriteLine("Rolled " + roll + " for jewelry item type which is... ");
+        jewelry.RollValueTable();
+        jewelry.PrintInfo();
     }
 
     public void RollItemType(int itemsAmount)
@@ -122,6 +133,9 @@ public class ExtraOrdinaryItems
             {
                 case 0:
                     RollExpertWeapon();
+                    break;
+                case 1:
+                    RollJewerlry();
                     break;
                 default:
                     RollExpertWeapon();
