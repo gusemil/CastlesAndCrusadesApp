@@ -29,6 +29,7 @@ public class Item
         if (this.isRollValueTable)
         {
             this.material = ValueTable.RollValueTable(this.gpValue);
+            gpValue += this.material.gpValue;
         }
     }
 
@@ -37,5 +38,6 @@ public class Item
         Console.WriteLine("Name: " + name + " gp value: " + gpValue);
         if (description != "") Console.WriteLine("Description: " + description);
         if (pageNumber != 0) Console.WriteLine("Page number: " + pageNumber);
+        if (isRollValueTable) Console.WriteLine("Material: " + this.material.description);
     }
 }
