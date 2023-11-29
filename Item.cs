@@ -12,16 +12,18 @@ public class Item
     public int pageNumber;
     public bool isRollValueTable;
     public ValueTable.ValueTableEntry material; //if ValueTable applies
+    public Roll rollGpValue;
     //TODO: Store material for later use?
     //public ValueTable.ValueTableEntry material;
 
-    public Item(string name, int gpValue, string description = "", int pageNumber = 0, bool rollValueTable = false)
+    public Item(string name, int gpValue, string description = "", int pageNumber = 0, bool rollValueTable = false, Roll rollGpValue = null)
     {
         this.name = name;
         this.gpValue = gpValue;
         this.description = description;
         this.pageNumber = pageNumber;
         this.isRollValueTable = rollValueTable;
+        this.rollGpValue = rollGpValue;
     }
 
     public void RollValueTable()
@@ -31,6 +33,14 @@ public class Item
             this.material = ValueTable.RollValueTable(this.gpValue);
             gpValue += this.material.gpValue;
         }
+    }
+
+    public void RollGpValue()
+    {
+        if (rollGpValue == null) return;
+        int roll = this.rollGpValue.RollXdY();
+        //Console.Write("GP VALUE " + this.gpValue + " + ROLL " + roll);
+        this.gpValue += roll;
     }
 
     public void PrintInfo()

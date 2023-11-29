@@ -10,6 +10,7 @@ public class ExtraOrdinaryItems
     private Dictionary<(int, int), ExtraOrdinaryItemType> itemTypeDictionary = null;
     private Dictionary<(int, int), Item> expertWeaponsDictionary = null;
     private Dictionary<(int, int), Item> jewelryDictionary = null;
+    private Dictionary<(int, int), Item> wornAndCeremonialDictionary = null;
 
     public ExtraOrdinaryItems()
     {
@@ -100,23 +101,61 @@ public class ExtraOrdinaryItems
         jewelryDictionary.Add((96, 100), new Item("'Waist Chain'", 0, "", 0, true));
     }
 
+        private void InitWornAndCeremonial()
+    {
+        if (wornAndCeremonialDictionary != null) return;
+        wornAndCeremonialDictionary = new Dictionary<(int, int), Item>();
+        //gp value of all is based on the value table
+        wornAndCeremonialDictionary.Add((1, 5), new Item("'Coronet'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((6, 10), new Item("'Crown'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((11, 15), new Item("'Orb'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((16, 20), new Item("'Scepter'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((21, 25), new Item("'Signet ring'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((26, 30), new Item("'Holy Symbol'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((31, 35), new Item("'Holy water'", 0, "'water container?'", 0, true));
+        wornAndCeremonialDictionary.Add((36, 40), new Item("'Idol'", 0, "'Relics include bones of saints, iconographic statues, or anything else that may be holy to a religious group.'", 0, true));
+        wornAndCeremonialDictionary.Add((41, 45), new Item("'Relic'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((46, 50), new Item("'Rune Stones'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((51, 55), new Item("'Fur coat'", 0, "", 0, false, new Roll(2,10)));
+        wornAndCeremonialDictionary.Add((56, 60), new Item("'Hair shirt'", 0, "", 0, false, new Roll(1, 10)));
+        wornAndCeremonialDictionary.Add((61, 65), new Item("'Leather jerkin'", 0, "", 0, false, new Roll(2, 10)));
+        wornAndCeremonialDictionary.Add((66, 70), new Item("'Oilskin cloth'", 0, "", 0, false, new Roll(2, 10)));
+        wornAndCeremonialDictionary.Add((71, 75), new Item("'Silk garment'", 0, "", 0, false, new Roll(5, 10)));
+        wornAndCeremonialDictionary.Add((76, 80), new Item("'Gown'", 0, "", 0, false,  new Roll(1, 10)));
+        wornAndCeremonialDictionary.Add((81, 85), new Item("'Hood'", 0, "", 0, false, new Roll(1, 4)));
+        wornAndCeremonialDictionary.Add((86, 90), new Item("'Mantle'", 0, "", 0, false, new Roll(1, 4)));
+        wornAndCeremonialDictionary.Add((91, 95), new Item("'Surcoat'", 0, "", 0, false, new Roll(3, 10)));
+        wornAndCeremonialDictionary.Add((96, 100), new Item("'Tabard'", 0, "", 0, false, new Roll(2, 10)));
+    }
+
     private void RollExpertWeapon()
     {
-        InitExpertWeapons();
+        InitExpertWeapons(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item expertWeapon = expertWeaponsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Console.WriteLine("Rolled " + roll + " for extraordinary weapon type which is... ");
         expertWeapon.PrintInfo();
     }
 
-    private void RollJewerlry()
+    private void RollJewelry()
     {
-        InitJewelry();
+        InitJewelry(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item jewelry = jewelryDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Console.WriteLine("Rolled " + roll + " for jewelry item type which is... ");
         jewelry.RollValueTable();
         jewelry.PrintInfo();
+    }
+
+    private void RollWornAndCeremonial()
+    {
+        InitWornAndCeremonial(); //Replace with a delegate?
+        int roll = CommonUtils.RollPercentage();
+        Item wornAndCeremonial = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Console.WriteLine("Rolled " + roll + " for worn and ceremonial item type which is... ");
+        wornAndCeremonial.RollGpValue();
+        wornAndCeremonial.RollValueTable();
+        wornAndCeremonial.PrintInfo();
     }
 
     public void RollItemType(int itemsAmount)
@@ -135,7 +174,10 @@ public class ExtraOrdinaryItems
                     RollExpertWeapon();
                     break;
                 case 1:
-                    RollJewerlry();
+                    RollJewelry();
+                    break;
+                case 2:
+                    RollWornAndCeremonial();
                     break;
                 default:
                     RollExpertWeapon();
