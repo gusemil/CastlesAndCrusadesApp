@@ -17,7 +17,7 @@ public class Roll
     {
         int roll = 0;
         int unadjustedRoll = 0;
-        Random rnd = new Random();
+        Random rnd = CommonUtils.RandomInstance;
         for (int i = 0; i < x; i++)
         {
             roll += rnd.Next(1, y);

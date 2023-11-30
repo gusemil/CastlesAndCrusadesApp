@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 public static class CommonUtils
 {
+    private static Random randomInstance = null;
+
+    public static void InitRandom()
+    {
+        if(RandomInstance == null) RandomInstance = new Random();
+    }
+
     public static void InvalidInput()
     {
         Console.WriteLine("\nInvalid input. Please try again");
@@ -14,7 +21,7 @@ public static class CommonUtils
     //TODO: Obsolete. Remove later but keep it for now
     public static int RollNumber(int min, int max, int modifier = 0)
     {
-        Random rnd = new Random();
+        Random rnd = RandomInstance;
         int roll = rnd.Next(min, max);
         if (modifier > 0)
         {
@@ -31,7 +38,7 @@ public static class CommonUtils
     }
     public static int RollPercentage()
     {
-        Random rnd = new Random();
+        Random rnd = RandomInstance;
         int roll = rnd.Next(1, 100);
         Console.WriteLine("Percentage roll: " + roll);
         return roll;
@@ -49,6 +56,7 @@ public static class CommonUtils
     }
 
     //TODO find item from dictionary method
+    public static Random RandomInstance { get => randomInstance; private set => randomInstance = value; }
 }
 
 

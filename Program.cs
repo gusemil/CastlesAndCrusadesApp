@@ -5,6 +5,7 @@ public class Program
     private static ExtraOrdinaryItems extraOrdinaryItems = new ExtraOrdinaryItems();
     static void Main(string[] args)
     {
+        CommonUtils.InitRandom();
         bool mainLoop = true;
         Console.WriteLine("Welcome, Castle Keeper!");
         while (mainLoop)
