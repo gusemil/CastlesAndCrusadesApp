@@ -39,7 +39,6 @@ public class Item
     {
         if (rollGpValue == null) return;
         int roll = this.rollGpValue.RollXdY();
-        //Console.Write("GP VALUE " + this.gpValue + " + ROLL " + roll);
         this.gpValue += roll;
     }
 

@@ -132,7 +132,8 @@ public class ExtraOrdinaryItems
     {
         InitExpertWeapons(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
-        Item expertWeapon = expertWeaponsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item expertWeaponEntry = expertWeaponsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item expertWeapon = new Item(expertWeaponEntry.name, expertWeaponEntry.gpValue, expertWeaponEntry.description, expertWeaponEntry.pageNumber, expertWeaponEntry.isRollValueTable, expertWeaponEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for extraordinary weapon type which is... ");
         expertWeapon.PrintInfo();
     }
@@ -141,7 +142,8 @@ public class ExtraOrdinaryItems
     {
         InitJewelry(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
-        Item jewelry = jewelryDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item jewelryEntry = jewelryDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item jewelry = new Item(jewelryEntry.name, jewelryEntry.gpValue, jewelryEntry.description, jewelryEntry.pageNumber, jewelryEntry.isRollValueTable, jewelryEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for jewelry item type which is... ");
         jewelry.RollValueTable();
         jewelry.PrintInfo();
@@ -151,7 +153,8 @@ public class ExtraOrdinaryItems
     {
         InitWornAndCeremonial(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
-        Item wornAndCeremonial = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item wornAndCeremonialEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item wornAndCeremonial = new Item(wornAndCeremonialEntry.name, wornAndCeremonialEntry.gpValue, wornAndCeremonialEntry.description, wornAndCeremonialEntry.pageNumber, wornAndCeremonialEntry.isRollValueTable, wornAndCeremonialEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for worn and ceremonial item type which is... ");
         wornAndCeremonial.RollGpValue();
         wornAndCeremonial.RollValueTable();
