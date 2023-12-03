@@ -139,7 +139,7 @@ public class ExtraOrdinaryItems
         wornAndCeremonialDictionary.Add((11, 15), new Item("'Paper, ink & quill'",15, "These should come in a scroll case or box"));
         wornAndCeremonialDictionary.Add((16, 20), new Item("'Silver snuff box'", 100));
         wornAndCeremonialDictionary.Add((21, 25), new Item("'Mechnical toy'", 0, "", 0, false, new Roll(2, 10)));
-        wornAndCeremonialDictionary.Add((26, 30), new Item("'China place settings'", 0, "from 1-12 are found, value is per setting", 0, false, new Roll(2, 6,0,10), CommonUtils.RollNumber(1,12));
+        wornAndCeremonialDictionary.Add((26, 30), new Item("'China place settings'", 0, "from 1-12 are found, value is per setting", 0, false, new Roll(2,6,0,10), new Roll(1,12)));
         wornAndCeremonialDictionary.Add((31, 35), new Item("''Crystal vase", 0, "", 0, false, new Roll(10,10)));
         wornAndCeremonialDictionary.Add((36, 40), new Item("'Pewter goblet'", 2));
         wornAndCeremonialDictionary.Add((41, 45), new Item("'Trencher, silver plated'", 4));
@@ -149,7 +149,7 @@ public class ExtraOrdinaryItems
         wornAndCeremonialDictionary.Add((61, 65), new Item("'Lute of Vaughn'", 120));
         wornAndCeremonialDictionary.Add((66, 70), new Item("'Elven mandolin'", 100, ""));
         wornAndCeremonialDictionary.Add((71, 75), new Item("'Dragonclaw panpipes'", 500));
-        wornAndCeremonialDictionary.Add((76, 80), new Item("'Animal pelt'", 0, "The value of any pelt ranges from 10 gp to 1000 gp depending on locale and rarity", 0, false, new Roll(10, 1000)));
+        wornAndCeremonialDictionary.Add((76, 80), new Item("'Animal pelt'", 0, "Cured. The value of any pelt ranges from 10 gp to 1000 gp depending on locale and rarity", 0, false, new Roll(10, 1000)));
         wornAndCeremonialDictionary.Add((81, 85), new Item("'Decorative egg'", 100));
         wornAndCeremonialDictionary.Add((86, 90), new Item("'Statue'", 0, "", 0, true));
         wornAndCeremonialDictionary.Add((91, 95), new Item("'Carved wood'", 0, "", 0, true));
@@ -189,6 +189,19 @@ public class ExtraOrdinaryItems
         wornAndCeremonial.PrintInfo();
     }
 
+    private void RollHandcrafted()
+    {
+        InitHandCrafted(); //Replace with a delegate?
+        int roll = 26;//CommonUtils.RollPercentage();
+        Item handcraftedEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item handcrafted = new Item(handcraftedEntry.name, handcraftedEntry.gpValue, handcraftedEntry.description, handcraftedEntry.pageNumber, handcraftedEntry.isRollValueTable, handcraftedEntry.rollGpValue);
+        Console.WriteLine("Rolled " + roll + " for worn and ceremonial item type which is... ");
+        handcrafted.RollAmount();
+        handcrafted.RollGpValue();
+        handcrafted.RollValueTable();
+        handcrafted.PrintInfo();
+    }
+
     public void RollItemType(int itemsAmount)
     {
         InitExtraOrdinaryItems();
@@ -210,8 +223,11 @@ public class ExtraOrdinaryItems
                 case 2:
                     RollWornAndCeremonial();
                     break;
+                case 3:
+                    RollHandcrafted();
+                    break;
                 default:
-                    RollExpertWeapon();
+                    RollHandcrafted();
                     //Console.WriteLine("Something went wrong");
                     break;
             }
