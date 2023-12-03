@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 public class Item
 {
     public string name;
-    public int gpValue;
+    public int gp;
+    public int xp;
     public string description;
     public int pageNumber;
     public bool isRollValueTable;
@@ -18,10 +19,11 @@ public class Item
     //TODO: Store material for later use?
     //public ValueTable.ValueTableEntry material;
 
-    public Item(string name, int gpValue, string description = "", int pageNumber = 0, bool isRollValueTable = false, Roll rollGpValue = null, Roll rollAmount = null)
+    public Item(string name, int gpValue, int xp = 0, string description = "", int pageNumber = 0, bool isRollValueTable = false, Roll rollGpValue = null, Roll rollAmount = null)
     {
         this.name = name;
-        this.gpValue = gpValue;
+        this.gp = gpValue;
+        this.xp = 0;
         this.description = description;
         this.pageNumber = pageNumber;
         this.isRollValueTable = isRollValueTable;
@@ -33,8 +35,8 @@ public class Item
     {
         if (isRollValueTable)
         {
-            material = ValueTable.RollValueTable(gpValue);
-            gpValue += material.gpValue;
+            material = ValueTable.RollValueTable(gp);
+            gp += material.gpValue;
         }
     }
 
@@ -45,12 +47,13 @@ public class Item
         for (int i = 0; i < amount; i++)
         {
             int roll = rollGpValue.RollXdY();
-            gpValue += roll;
+            gp += roll;
         }
     }
 
     public void RollAmount()
     {
+        //TODO: Bug with amount fix later...
         if (this.rollAmount == null) return;
 
         this.amount = this.rollAmount.RollXdY();
@@ -58,7 +61,7 @@ public class Item
 
     public void PrintInfo()
     {
-        Console.WriteLine("Name: " + name + " gp value: " + gpValue + " amount: " + amount);
+        Console.WriteLine("Name: " + name + " gp value: " + gp + " amount: " + amount);
         if (description != "") Console.WriteLine("Description: " + description);
         if (pageNumber != 0) Console.WriteLine("Page number: " + pageNumber);
         if (isRollValueTable) Console.WriteLine("Material: " + material.description);

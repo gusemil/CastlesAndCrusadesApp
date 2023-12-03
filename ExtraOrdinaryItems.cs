@@ -12,6 +12,7 @@ public class ExtraOrdinaryItems
     private Dictionary<(int, int), Item> jewelryDictionary = null;
     private Dictionary<(int, int), Item> wornAndCeremonialDictionary = null;
     private Dictionary<(int, int), Item> handcraftedDictionary = null;
+    private Dictionary<(int, int), Item> antiquesDictionary = null;
 
     public ExtraOrdinaryItems()
     {
@@ -46,31 +47,31 @@ public class ExtraOrdinaryItems
         itemTypeDictionary.Add((5, 8), new ExtraOrdinaryItemType(1, "'Jewelry'"));
         itemTypeDictionary.Add((9, 12), new ExtraOrdinaryItemType(2, "'Worn & Ceremonial Items'"));
         itemTypeDictionary.Add((13, 16), new ExtraOrdinaryItemType(3, "'Hand Crafted Items'"));
-        itemTypeDictionary.Add((17, 20), new ExtraOrdinaryItemType(4, "'Antiquities'"));
+        itemTypeDictionary.Add((17, 20), new ExtraOrdinaryItemType(4, "'Antiques'"));
     }
 
     private void InitExpertWeapons()
     {
         if (expertWeaponsDictionary != null) return;
         expertWeaponsDictionary = new Dictionary<(int, int), Item>();
-        expertWeaponsDictionary.Add((1, 5), new Item("'Arrow'", 1));
-        expertWeaponsDictionary.Add((6, 10), new Item("'Battle Axe'", 100));
-        expertWeaponsDictionary.Add((11, 15), new Item("'Bolt'", 12, "'Gp value in sp'"));
-        expertWeaponsDictionary.Add((16, 20), new Item("'Bow'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        expertWeaponsDictionary.Add((21, 25), new Item("'Crossbow'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((1, 5), new Item("'Arrow'", 1, 0));
+        expertWeaponsDictionary.Add((6, 10), new Item("'Battle Axe'", 100, 0));
+        expertWeaponsDictionary.Add((11, 15), new Item("'Bolt'", 12, 0, "'Gp value in sp'"));
+        expertWeaponsDictionary.Add((16, 20), new Item("'Bow'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((21, 25), new Item("'Crossbow'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
         expertWeaponsDictionary.Add((26, 30), new Item("'Dagger'", 20));
-        expertWeaponsDictionary.Add((31, 35), new Item("'Dart'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        expertWeaponsDictionary.Add((36, 40), new Item("'Flail'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((31, 35), new Item("'Dart'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((36, 40), new Item("'Flail'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
         expertWeaponsDictionary.Add((41, 45), new Item("'Halberd'", 100));
-        expertWeaponsDictionary.Add((46, 50), new Item("'Hammer'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((46, 50), new Item("'Hammer'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
         expertWeaponsDictionary.Add((51, 55), new Item("'Hand Axe'", 40));
         expertWeaponsDictionary.Add((56, 60), new Item("'Javelin'", 10));
-        expertWeaponsDictionary.Add((61, 65), new Item("'Lance'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        expertWeaponsDictionary.Add((66, 70), new Item("'Mace'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((61, 65), new Item("'Lance'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((66, 70), new Item("'Mace'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
         expertWeaponsDictionary.Add((71, 75), new Item("'Morningstar'", 80));
         expertWeaponsDictionary.Add((76, 80), new Item("'Scimitar'", 150));
-        expertWeaponsDictionary.Add((81, 85), new Item("'Spear'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
-        expertWeaponsDictionary.Add((86, 90), new Item("'Sword'", 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((81, 85), new Item("'Spear'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
+        expertWeaponsDictionary.Add((86, 90), new Item("'Sword'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
         expertWeaponsDictionary.Add((91, 95), new Item("'Trident'", 100));
         expertWeaponsDictionary.Add((96, 100), new Item("'Two-Handed Axe'", 300));
     }
@@ -80,26 +81,26 @@ public class ExtraOrdinaryItems
         if (jewelryDictionary != null) return;
         jewelryDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
-        jewelryDictionary.Add((1, 5), new Item("'Ankle Chain'", 0, "", 0, true));
-        jewelryDictionary.Add((6, 10), new Item("'Arm Band'", 0, "", 0, true));
-        jewelryDictionary.Add((11, 15), new Item("'Belt'", 0, "", 0, true));
-        jewelryDictionary.Add((16, 20), new Item("'Bracelet'", 0, "", 0, true));
-        jewelryDictionary.Add((21, 25), new Item("'Broach'", 0, "", 0, true));
-        jewelryDictionary.Add((26, 30), new Item("'Buckle'", 0, "", 0, true));
-        jewelryDictionary.Add((31, 35), new Item("'Button'", 0, "'2-4 buttons, each button 1gp worth'", 0, true));
-        jewelryDictionary.Add((36, 40), new Item("'Collar'", 0, "", 0, true));
-        jewelryDictionary.Add((41, 45), new Item("'Choker'", 0, "", 0, true));
-        jewelryDictionary.Add((46, 50), new Item("'Earrings'", 0, "", 0, true));
-        jewelryDictionary.Add((51, 55), new Item("'Locket'", 0, "", 0, true));
-        jewelryDictionary.Add((56, 60), new Item("'Medallion'", 0, "", 0, true));
-        jewelryDictionary.Add((61, 65), new Item("'Necklace'", 0, "", 0, true));
-        jewelryDictionary.Add((66, 70), new Item("'Pendant'", 0, "", 0, true));
-        jewelryDictionary.Add((71, 75), new Item("'Ring'", 0, "", 0, true));
-        jewelryDictionary.Add((76, 80), new Item("'Stud'", 0, "", 0, true));
-        jewelryDictionary.Add((81, 85), new Item("'Tiara'", 0, "", 0, true));
-        jewelryDictionary.Add((86, 90), new Item("'Toe Ring'", 0, "", 0, true));
-        jewelryDictionary.Add((91, 95), new Item("'Torque'", 0, "", 0, true));
-        jewelryDictionary.Add((96, 100), new Item("'Waist Chain'", 0, "", 0, true));
+        jewelryDictionary.Add((1, 5), new Item("'Ankle Chain'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((6, 10), new Item("'Arm Band'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((11, 15), new Item("'Belt'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((16, 20), new Item("'Bracelet'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((21, 25), new Item("'Broach'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((26, 30), new Item("'Buckle'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((31, 35), new Item("'Button'", 0, 0, "'2-4 buttons, each button 1gp worth'", 0, true));
+        jewelryDictionary.Add((36, 40), new Item("'Collar'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((41, 45), new Item("'Choker'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((46, 50), new Item("'Earrings'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((51, 55), new Item("'Locket'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((56, 60), new Item("'Medallion'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((61, 65), new Item("'Necklace'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((66, 70), new Item("'Pendant'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((71, 75), new Item("'Ring'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((76, 80), new Item("'Stud'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((81, 85), new Item("'Tiara'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((86, 90), new Item("'Toe Ring'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((91, 95), new Item("'Torque'", 0, 0, "", 0, true));
+        jewelryDictionary.Add((96, 100), new Item("'Waist Chain'", 0, 0, "", 0, true));
     }
 
     private void InitWornAndCeremonial()
@@ -107,26 +108,26 @@ public class ExtraOrdinaryItems
         if (wornAndCeremonialDictionary != null) return;
         wornAndCeremonialDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
-        wornAndCeremonialDictionary.Add((1, 5), new Item("'Coronet'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((6, 10), new Item("'Crown'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((11, 15), new Item("'Orb'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((16, 20), new Item("'Scepter'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((21, 25), new Item("'Signet ring'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((26, 30), new Item("'Holy Symbol'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((31, 35), new Item("'Holy water'", 0, "'water container?'", 0, true));
-        wornAndCeremonialDictionary.Add((36, 40), new Item("'Idol'", 0, "'Relics include bones of saints, iconographic statues, or anything else that may be holy to a religious group.'", 0, true));
-        wornAndCeremonialDictionary.Add((41, 45), new Item("'Relic'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((46, 50), new Item("'Rune Stones'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((51, 55), new Item("'Fur coat'", 0, "", 0, false, new Roll(2, 10)));
-        wornAndCeremonialDictionary.Add((56, 60), new Item("'Hair shirt'", 0, "", 0, false, new Roll(1, 10)));
-        wornAndCeremonialDictionary.Add((61, 65), new Item("'Leather jerkin'", 0, "", 0, false, new Roll(2, 10)));
-        wornAndCeremonialDictionary.Add((66, 70), new Item("'Oilskin cloth'", 0, "", 0, false, new Roll(2, 10)));
-        wornAndCeremonialDictionary.Add((71, 75), new Item("'Silk garment'", 0, "", 0, false, new Roll(5, 10)));
-        wornAndCeremonialDictionary.Add((76, 80), new Item("'Gown'", 0, "", 0, false, new Roll(1, 10)));
-        wornAndCeremonialDictionary.Add((81, 85), new Item("'Hood'", 0, "", 0, false, new Roll(1, 4)));
-        wornAndCeremonialDictionary.Add((86, 90), new Item("'Mantle'", 0, "", 0, false, new Roll(1, 4)));
-        wornAndCeremonialDictionary.Add((91, 95), new Item("'Surcoat'", 0, "", 0, false, new Roll(3, 10)));
-        wornAndCeremonialDictionary.Add((96, 100), new Item("'Tabard'", 0, "", 0, false, new Roll(2, 10)));
+        wornAndCeremonialDictionary.Add((1, 5), new Item("'Coronet'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((6, 10), new Item("'Crown'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((11, 15), new Item("'Orb'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((16, 20), new Item("'Scepter'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((21, 25), new Item("'Signet ring'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((26, 30), new Item("'Holy Symbol'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((31, 35), new Item("'Holy water'", 0, 0, "'water container?'", 0, true));
+        wornAndCeremonialDictionary.Add((36, 40), new Item("'Idol'", 0, 0, "'Relics include bones of saints, iconographic statues, or anything else that may be holy to a religious group.'", 0, true));
+        wornAndCeremonialDictionary.Add((41, 45), new Item("'Relic'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((46, 50), new Item("'Rune Stones'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((51, 55), new Item("'Fur coat'", 0, 0, "", 0, false, new Roll(2, 10)));
+        wornAndCeremonialDictionary.Add((56, 60), new Item("'Hair shirt'", 0, 0, "", 0, false, new Roll(1, 10)));
+        wornAndCeremonialDictionary.Add((61, 65), new Item("'Leather jerkin'", 0, 0, "", 0, false, new Roll(2, 10)));
+        wornAndCeremonialDictionary.Add((66, 70), new Item("'Oilskin cloth'", 0, 0, "", 0, false, new Roll(2, 10)));
+        wornAndCeremonialDictionary.Add((71, 75), new Item("'Silk garment'", 0, 0, "", 0, false, new Roll(5, 10)));
+        wornAndCeremonialDictionary.Add((76, 80), new Item("'Gown'", 0, 0, "", 0, false, new Roll(1, 10)));
+        wornAndCeremonialDictionary.Add((81, 85), new Item("'Hood'", 0, 0, "", 0, false, new Roll(1, 4)));
+        wornAndCeremonialDictionary.Add((86, 90), new Item("'Mantle'", 0, 0, "", 0, false, new Roll(1, 4)));
+        wornAndCeremonialDictionary.Add((91, 95), new Item("'Surcoat'", 0, 0, "", 0, false, new Roll(3, 10)));
+        wornAndCeremonialDictionary.Add((96, 100), new Item("'Tabard'", 0, 0, "", 0, false, new Roll(2, 10)));
     }
 
     private void InitHandCrafted()
@@ -136,24 +137,51 @@ public class ExtraOrdinaryItems
         //gp value of all is based on the value table
         wornAndCeremonialDictionary.Add((1, 5), new Item("'Wooden bird cage'", 20));
         wornAndCeremonialDictionary.Add((6, 10), new Item("'Ivory pipe'", 50));
-        wornAndCeremonialDictionary.Add((11, 15), new Item("'Paper, ink & quill'",15, "These should come in a scroll case or box"));
+        wornAndCeremonialDictionary.Add((11, 15), new Item("'Paper, ink & quill'", 15, 0, "These should come in a scroll case or box"));
         wornAndCeremonialDictionary.Add((16, 20), new Item("'Silver snuff box'", 100));
-        wornAndCeremonialDictionary.Add((21, 25), new Item("'Mechnical toy'", 0, "", 0, false, new Roll(2, 10)));
-        wornAndCeremonialDictionary.Add((26, 30), new Item("'China place settings'", 0, "from 1-12 are found, value is per setting", 0, false, new Roll(2,6,0,10), new Roll(1,12)));
-        wornAndCeremonialDictionary.Add((31, 35), new Item("''Crystal vase", 0, "", 0, false, new Roll(10,10)));
+        wornAndCeremonialDictionary.Add((21, 25), new Item("'Mechnical toy'", 0, 0, "", 0, false, new Roll(2, 10)));
+        wornAndCeremonialDictionary.Add((26, 30), new Item("'China place settings'", 0, 0, "from 1-12 are found, value is per setting", 0, false, new Roll(2, 6, 0, 10), new Roll(1, 12)));
+        wornAndCeremonialDictionary.Add((31, 35), new Item("''Crystal vase", 0, 0, "", 0, false, new Roll(10, 10)));
         wornAndCeremonialDictionary.Add((36, 40), new Item("'Pewter goblet'", 2));
         wornAndCeremonialDictionary.Add((41, 45), new Item("'Trencher, silver plated'", 4));
         wornAndCeremonialDictionary.Add((46, 50), new Item("'Wooden gourd'", 1));
-        wornAndCeremonialDictionary.Add((51, 55), new Item("'Golden harp'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((56, 60), new Item("'Hunter's horn'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((51, 55), new Item("'Golden harp'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((56, 60), new Item("'Hunter's horn'", 0, 0, "", 0, true));
         wornAndCeremonialDictionary.Add((61, 65), new Item("'Lute of Vaughn'", 120));
-        wornAndCeremonialDictionary.Add((66, 70), new Item("'Elven mandolin'", 100, ""));
+        wornAndCeremonialDictionary.Add((66, 70), new Item("'Elven mandolin'", 100));
         wornAndCeremonialDictionary.Add((71, 75), new Item("'Dragonclaw panpipes'", 500));
-        wornAndCeremonialDictionary.Add((76, 80), new Item("'Animal pelt'", 0, "Cured. The value of any pelt ranges from 10 gp to 1000 gp depending on locale and rarity", 0, false, new Roll(10, 1000)));
+        wornAndCeremonialDictionary.Add((76, 80), new Item("'Animal pelt'", 0, 0, "Cured. The value of any pelt ranges from 10 gp to 1000 gp depending on locale and rarity", 0, false, new Roll(10, 1000)));
         wornAndCeremonialDictionary.Add((81, 85), new Item("'Decorative egg'", 100));
-        wornAndCeremonialDictionary.Add((86, 90), new Item("'Statue'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((91, 95), new Item("'Carved wood'", 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((96, 100), new Item("'Miniature figurine'", 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((86, 90), new Item("'Statue'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((91, 95), new Item("'Carved wood'", 0, 0, "", 0, true));
+        wornAndCeremonialDictionary.Add((96, 100), new Item("'Miniature figurine'", 0, 0, "", 0, true));
+    }
+
+    private void InitAntiques()
+    {
+        if (antiquesDictionary != null) return;
+        antiquesDictionary = new Dictionary<(int, int), Item>();
+        //gp value of all is based on the value table
+        antiquesDictionary.Add((1, 5), new Item("'Book(s)'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(10, 10)));
+        antiquesDictionary.Add((6, 10), new Item("'Charts'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(5, 10)));
+        antiquesDictionary.Add((11, 15), new Item("'Map'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(5, 10)));
+        antiquesDictionary.Add((16, 20), new Item("'Scroll'", 0, 0, "", 0, false, new Roll(10, 10)));
+        antiquesDictionary.Add((21, 25), new Item("'Stone'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
+        antiquesDictionary.Add((26, 30), new Item("'Banner'", 250));
+        antiquesDictionary.Add((31, 35), new Item("'Painting'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
+        antiquesDictionary.Add((36, 40), new Item("'Rug'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
+        antiquesDictionary.Add((41, 45), new Item("'Tapestry'", 0, 0, "", 0, false, new Roll(10, 10, 100)));
+        antiquesDictionary.Add((46, 50), new Item("'Trophy'", 0, 0, "", 0, false, new Roll(10, 10)));
+        antiquesDictionary.Add((51, 55), new Item("'Brazier'", 0, 0, "", 0, true));
+        antiquesDictionary.Add((56, 60), new Item("'Candlelabra'", 0, 0, "", 0, true));
+        antiquesDictionary.Add((61, 65), new Item("'Coffer'", 0, 0, "", 0, true));
+        antiquesDictionary.Add((66, 70), new Item("'Urn'", 0, 0, "", 0, true));
+        antiquesDictionary.Add((71, 75), new Item("'Death Mask'", 0, 0, "", 0, true));
+        antiquesDictionary.Add((76, 80), new Item("'Hour glass'", 0, 0, "", 0, true));
+        antiquesDictionary.Add((81, 85), new Item("'Music box'", 0, 0, "", 0, true));
+        antiquesDictionary.Add((86, 90), new Item("'Mirror'", 0, 0, "", 0, true));
+        antiquesDictionary.Add((91, 95), new Item("'Wine'", 0, 0, "", 0, false, new Roll(2, 10, 10)));
+        antiquesDictionary.Add((96, 100), new Item("'Troll knuckles'", 0, 0, "", 0, true));
     }
 
     private void RollExpertWeapon()
@@ -161,7 +189,7 @@ public class ExtraOrdinaryItems
         InitExpertWeapons(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item expertWeaponEntry = expertWeaponsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
-        Item expertWeapon = new Item(expertWeaponEntry.name, expertWeaponEntry.gpValue, expertWeaponEntry.description, expertWeaponEntry.pageNumber, expertWeaponEntry.isRollValueTable, expertWeaponEntry.rollGpValue);
+        Item expertWeapon = new Item(expertWeaponEntry.name, expertWeaponEntry.gp, expertWeaponEntry.xp, expertWeaponEntry.description, expertWeaponEntry.pageNumber, expertWeaponEntry.isRollValueTable, expertWeaponEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for extraordinary weapon type which is... ");
         expertWeapon.PrintInfo();
     }
@@ -171,7 +199,7 @@ public class ExtraOrdinaryItems
         InitJewelry(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item jewelryEntry = jewelryDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
-        Item jewelry = new Item(jewelryEntry.name, jewelryEntry.gpValue, jewelryEntry.description, jewelryEntry.pageNumber, jewelryEntry.isRollValueTable, jewelryEntry.rollGpValue);
+        Item jewelry = new Item(jewelryEntry.name, jewelryEntry.gp, jewelryEntry.xp, jewelryEntry.description, jewelryEntry.pageNumber, jewelryEntry.isRollValueTable, jewelryEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for jewelry item type which is... ");
         jewelry.RollValueTable();
         jewelry.PrintInfo();
@@ -182,7 +210,7 @@ public class ExtraOrdinaryItems
         InitWornAndCeremonial(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item wornAndCeremonialEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
-        Item wornAndCeremonial = new Item(wornAndCeremonialEntry.name, wornAndCeremonialEntry.gpValue, wornAndCeremonialEntry.description, wornAndCeremonialEntry.pageNumber, wornAndCeremonialEntry.isRollValueTable, wornAndCeremonialEntry.rollGpValue);
+        Item wornAndCeremonial = new Item(wornAndCeremonialEntry.name, wornAndCeremonialEntry.gp, wornAndCeremonialEntry.xp, wornAndCeremonialEntry.description, wornAndCeremonialEntry.pageNumber, wornAndCeremonialEntry.isRollValueTable, wornAndCeremonialEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for worn and ceremonial item type which is... ");
         wornAndCeremonial.RollGpValue();
         wornAndCeremonial.RollValueTable();
@@ -194,12 +222,25 @@ public class ExtraOrdinaryItems
         InitHandCrafted(); //Replace with a delegate?
         int roll = 26;//CommonUtils.RollPercentage();
         Item handcraftedEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
-        Item handcrafted = new Item(handcraftedEntry.name, handcraftedEntry.gpValue, handcraftedEntry.description, handcraftedEntry.pageNumber, handcraftedEntry.isRollValueTable, handcraftedEntry.rollGpValue);
-        Console.WriteLine("Rolled " + roll + " for worn and ceremonial item type which is... ");
+        Item handcrafted = new Item(handcraftedEntry.name, handcraftedEntry.gp, handcraftedEntry.xp, handcraftedEntry.description, handcraftedEntry.pageNumber, handcraftedEntry.isRollValueTable, handcraftedEntry.rollGpValue);
+        Console.WriteLine("Rolled " + roll + " for handcrafted item type which is... ");
         handcrafted.RollAmount();
         handcrafted.RollGpValue();
         handcrafted.RollValueTable();
         handcrafted.PrintInfo();
+    }
+
+    private void RollAntiques()
+    {
+        InitAntiques(); //Replace with a delegate?
+        int roll = CommonUtils.RollPercentage();
+        Item antiquesEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item antiques = new Item(antiquesEntry.name, antiquesEntry.gp, antiquesEntry.xp, antiquesEntry.description, antiquesEntry.pageNumber, antiquesEntry.isRollValueTable, antiquesEntry.rollGpValue);
+        Console.WriteLine("Rolled " + roll + " for antiques item type which is... ");
+        antiques.RollAmount();
+        antiques.RollGpValue();
+        antiques.RollValueTable();
+        antiques.PrintInfo();
     }
 
     public void RollItemType(int itemsAmount)
@@ -226,9 +267,11 @@ public class ExtraOrdinaryItems
                 case 3:
                     RollHandcrafted();
                     break;
+                case 4:
+                    RollAntiques();
+                    break;
                 default:
-                    RollHandcrafted();
-                    //Console.WriteLine("Something went wrong");
+                    Console.WriteLine("Something went wrong");
                     break;
             }
         }
