@@ -253,7 +253,7 @@ public class ExtraOrdinaryItems
             int roll = CommonUtils.RollNumber(1, 20);
             ExtraOrdinaryItemType itemType = itemTypeDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
 
-            Console.WriteLine("Rolled " + roll + " for extraordinary item type which is " + itemType.subTableDescription + " and table index " + itemType.subTableIndex);
+            Console.WriteLine("Rolled " + roll + " for extraordinary item type which is " + itemType.subTableDescription + " and table index " + (itemType.subTableIndex +1));
 
             switch (itemType.subTableIndex)
             {

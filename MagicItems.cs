@@ -8,6 +8,7 @@ public class MagicItems
 {
     public Dictionary<int, MagicItemsTable> magicItemsDictionary = null;
     private Dictionary<(int, int), MagicItemType> magicItemTypesDictionary = null;
+    private Dictionary<(int, int), Item> potionsDictionary = null;
 
     public MagicItems()
     {
@@ -40,14 +41,54 @@ public class MagicItems
         magicItemTypesDictionary.Add((1, 15), new MagicItemType(0, "'Potions'"));
         magicItemTypesDictionary.Add((16, 30), new MagicItemType(1, "'Scroll'"));
         magicItemTypesDictionary.Add((31, 45), new MagicItemType(2, "'Weapon'"));
-        magicItemTypesDictionary.Add((46, 60), new MagicItemType(2, "'Armor & Shields'"));
-        magicItemTypesDictionary.Add((61, 80), new MagicItemType(3, "'Miscellaneous Magic'"));
-        magicItemTypesDictionary.Add((81, 90), new MagicItemType(4, "'Rings'"));
-        magicItemTypesDictionary.Add((91, 97), new MagicItemType(4, "'Rods, Staves, Wands'"));
-        magicItemTypesDictionary.Add((98, 99), new MagicItemType(4, "'Cursed Items'"));
-        magicItemTypesDictionary.Add((100, 100), new MagicItemType(4, "'Artifacts'"));
+        magicItemTypesDictionary.Add((46, 60), new MagicItemType(3, "'Armor & Shields'"));
+        magicItemTypesDictionary.Add((61, 80), new MagicItemType(4, "'Miscellaneous Magic'"));
+        magicItemTypesDictionary.Add((81, 90), new MagicItemType(5, "'Rings'"));
+        magicItemTypesDictionary.Add((91, 97), new MagicItemType(6, "'Rods, Staves, Wands'"));
+        magicItemTypesDictionary.Add((98, 99), new MagicItemType(7, "'Cursed Items'"));
+        magicItemTypesDictionary.Add((100, 100), new MagicItemType(8, "'Artifacts'"));
     }
 
+    private void InitPotions()
+    {
+        if (potionsDictionary != null) return;
+        potionsDictionary = new Dictionary<(int, int), Item>();
+        
+        potionsDictionary.Add((1, 3), new Item("'Aid'", 400, 200));
+        potionsDictionary.Add((4, 6), new Item("'Bless oil'", 300, 100));
+        potionsDictionary.Add((7, 9), new Item("'Blur", 400, 200));
+        potionsDictionary.Add((10, 12), new Item("'Clairaudience/Clairvoyance'", 500, 300));
+        potionsDictionary.Add((13, 15), new Item("'Cure Light Wounds'", 300, 100));
+        potionsDictionary.Add((16, 18), new Item("'Cure Serious Wounds'", 500, 300));
+        potionsDictionary.Add((19, 21), new Item("'Cure Critical Wounds'", 700, 500));
+        potionsDictionary.Add((22, 24), new Item("'Delay Poison'", 400, 200));
+        potionsDictionary.Add((25, 27), new Item("'Endure Elements'", 300, 100));
+        potionsDictionary.Add((28, 30), new Item("'Fly'", 500, 300));
+        potionsDictionary.Add((31, 33), new Item("'Gaseous Form'", 500, 300));
+        potionsDictionary.Add((34, 36), new Item("'Giant Strength'", 700, 500, "Roll 1d6 between 19-24 STR (+3 - +6 STR mod)")); //TODO: roll for giant type
+        potionsDictionary.Add((37, 39), new Item("'Haste'", 500, 300));
+        potionsDictionary.Add((40, 42), new Item("'Heal'", 800, 600));
+        potionsDictionary.Add((43, 45), new Item("'Invisibility (potion or oil)'", 400, 200));
+        potionsDictionary.Add((46, 48), new Item("'Levitation (potion or oil)'", 400, 200));
+        potionsDictionary.Add((49, 51), new Item("'Longevity'", 12000, 1500, "Exilir of youth: 2-12 off age. A small chance to reverse effect and age 1-6 years. CK must determine this chance on campaign and situation"));
+        potionsDictionary.Add((52, 54), new Item("'Neutralize Poison'", 600, 400));
+        potionsDictionary.Add((55, 57), new Item("'Nondetection'", 500, 300));
+        potionsDictionary.Add((58, 60), new Item("'Pass without Trace'", 300, 100));
+        potionsDictionary.Add((61, 63), new Item("'Protection from Alignment'", 300, 100, "Character gains +2 AC and Saves against alignment of CK's choice. Lasts 2 rounds per level of the creator"));
+        potionsDictionary.Add((64, 66), new Item("'Protection from Arrows'", 500, 300));
+        potionsDictionary.Add((67, 69), new Item("'Remove Blindess/deafness'", 500, 300));
+        potionsDictionary.Add((70, 72), new Item("'Remove Curse'", 500, 300));
+        potionsDictionary.Add((73, 75), new Item("'Remove Paralysis'", 400, 200));
+        potionsDictionary.Add((76, 78), new Item("'Restoration'", 700, 400));
+        potionsDictionary.Add((79, 81), new Item("'Sanctuary'", 300, 100));
+        potionsDictionary.Add((82, 84), new Item("'Shield of Faith +2'", 300, 100));
+        potionsDictionary.Add((85, 87), new Item("'Spider Climb'", 300, 100));
+        potionsDictionary.Add((88, 90), new Item("'Tongues'", 500, 300));
+        potionsDictionary.Add((91, 93), new Item("'Water Breathing'", 500, 300));
+        potionsDictionary.Add((94, 96), new Item("'Water Walk'", 900, 700));
+        potionsDictionary.Add((97, 99), new Item("'Remove Disease'", 500, 300));
+        potionsDictionary.Add((100, 100), new Item("'Trap the Soul'", 1100, 900));
+    }
     public void RollItemType(int itemsAmount)
     {
         InitMagicItems();
@@ -56,13 +97,14 @@ public class MagicItems
             int roll = CommonUtils.RollPercentage();
             MagicItemType itemType = magicItemTypesDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
 
-            Console.WriteLine("Rolled " + roll + " for magic item type which is " + itemType.subTableDescription + " and table index " + itemType.subTableIndex);
+            Console.WriteLine("Rolled " + roll + " for magic item type which is " + itemType.subTableDescription + " and table index " + (itemType.subTableIndex +1));
 
             switch (itemType.subTableIndex)
             {
                 case 0:
                     RollPotions();
                     break;
+                /*
                 case 1:
                     RollScrolls();
                     break;
@@ -87,6 +129,7 @@ public class MagicItems
                 case 8:
                     RollArtifacts();
                     break;
+                */
                 default:
                     Console.WriteLine("Something went wrong");
                     break;
@@ -96,7 +139,12 @@ public class MagicItems
 
     private void RollPotions()
     {
-        
+        InitPotions(); //Replace with a delegate?
+        int roll = CommonUtils.RollPercentage();
+        Item potionsEntry = potionsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item potion = new Item(potionsEntry.name, potionsEntry.gp, potionsEntry.xp, potionsEntry.description, potionsEntry.pageNumber, potionsEntry.isRollValueTable, potionsEntry.rollGpValue);
+        Console.WriteLine("Rolled " + roll + " for potion type which is... ");
+        potion.PrintInfo();
     }
 
     private void RollScrolls()
