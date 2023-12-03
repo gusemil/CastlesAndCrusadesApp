@@ -8,11 +8,12 @@ public class Program
     {
         CommonUtils.InitRandom();
         bool mainLoop = true;
+        bool reroll = true;
+        int treasureLevel = 0;
         Console.WriteLine("Welcome, Castle Keeper!");
         while (mainLoop)
         {
             Console.WriteLine("\n\nDo you want to choose or roll treasure level? C/R");
-            int treasureLevel;
             ConsoleKeyInfo input = Console.ReadKey();
             if (input.Key == ConsoleKey.C)
             {
@@ -39,8 +40,23 @@ public class Program
                 CommonUtils.InvalidInput();
             }
 
+            //Reroll
+            reroll = true;
+            while (reroll)
+            {
+                Console.WriteLine("\nDo you wish to reroll? R/any key to exit");
+                if (Console.ReadKey().Key == ConsoleKey.R)
+                {
+                    RollTreasure(treasureLevel);
+                }
+                else
+                {
+                    reroll = false;
+                }
+            }
+
             //End
-            Console.WriteLine("Do you wish to end the application? Y/N");
+            Console.WriteLine("\nDo you wish to end the application? Y/N");
             if (Console.ReadKey().Key == ConsoleKey.Y)
             {
                 Console.WriteLine("");

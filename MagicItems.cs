@@ -39,9 +39,10 @@ public class MagicItems
         magicItemTypesDictionary = new Dictionary<(int, int), MagicItemType>();
         magicItemTypesDictionary.Add((1, 15), new MagicItemType(0, "'Potions'"));
         magicItemTypesDictionary.Add((16, 30), new MagicItemType(1, "'Scroll'"));
-        magicItemTypesDictionary.Add((31, 45), new MagicItemType(2, "'Armor & Shields'"));
-        magicItemTypesDictionary.Add((46, 60), new MagicItemType(3, "'Miscellaneous Magic'"));
-        magicItemTypesDictionary.Add((61, 80), new MagicItemType(4, "'Rings'"));
+        magicItemTypesDictionary.Add((31, 45), new MagicItemType(2, "'Weapon'"));
+        magicItemTypesDictionary.Add((46, 60), new MagicItemType(2, "'Armor & Shields'"));
+        magicItemTypesDictionary.Add((61, 80), new MagicItemType(3, "'Miscellaneous Magic'"));
+        magicItemTypesDictionary.Add((81, 90), new MagicItemType(4, "'Rings'"));
         magicItemTypesDictionary.Add((91, 97), new MagicItemType(4, "'Rods, Staves, Wands'"));
         magicItemTypesDictionary.Add((98, 99), new MagicItemType(4, "'Cursed Items'"));
         magicItemTypesDictionary.Add((100, 100), new MagicItemType(4, "'Artifacts'"));

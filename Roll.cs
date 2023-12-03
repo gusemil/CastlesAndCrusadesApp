@@ -20,7 +20,7 @@ public class Roll
         Random rnd = CommonUtils.RandomInstance;
         for (int i = 0; i < x; i++)
         {
-            roll += rnd.Next(1, y);
+            roll += rnd.Next(1, y +1); //+1 to include maximum
         }
 
         unadjustedRoll = roll;

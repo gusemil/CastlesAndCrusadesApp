@@ -18,11 +18,10 @@ public static class CommonUtils
         Console.WriteLine("\nInvalid input. Please try again");
     }
 
-    //TODO: Obsolete. Remove later but keep it for now
     public static int RollNumber(int min, int max, int modifier = 0)
     {
         Random rnd = RandomInstance;
-        int roll = rnd.Next(min, max);
+        int roll = rnd.Next(min, (max +1)); //+1 to include maximum
         if (modifier > 0)
         {
             roll += modifier;
@@ -39,7 +38,7 @@ public static class CommonUtils
     public static int RollPercentage()
     {
         Random rnd = RandomInstance;
-        int roll = rnd.Next(1, 100);
+        int roll = rnd.Next(1, (100 +1)); //+1 to include maximum
         Console.WriteLine("Percentage roll: " + roll);
         return roll;
     }

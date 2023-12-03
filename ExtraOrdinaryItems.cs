@@ -133,32 +133,33 @@ public class ExtraOrdinaryItems
     private void InitHandCrafted()
     {
         if (handcraftedDictionary != null) return;
-        wornAndCeremonialDictionary = new Dictionary<(int, int), Item>();
+        handcraftedDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
-        wornAndCeremonialDictionary.Add((1, 5), new Item("'Wooden bird cage'", 20));
-        wornAndCeremonialDictionary.Add((6, 10), new Item("'Ivory pipe'", 50));
-        wornAndCeremonialDictionary.Add((11, 15), new Item("'Paper, ink & quill'", 15, 0, "These should come in a scroll case or box"));
-        wornAndCeremonialDictionary.Add((16, 20), new Item("'Silver snuff box'", 100));
-        wornAndCeremonialDictionary.Add((21, 25), new Item("'Mechnical toy'", 0, 0, "", 0, false, new Roll(2, 10)));
-        wornAndCeremonialDictionary.Add((26, 30), new Item("'China place settings'", 0, 0, "from 1-12 are found, value is per setting", 0, false, new Roll(2, 6, 0, 10), new Roll(1, 12)));
-        wornAndCeremonialDictionary.Add((31, 35), new Item("''Crystal vase", 0, 0, "", 0, false, new Roll(10, 10)));
-        wornAndCeremonialDictionary.Add((36, 40), new Item("'Pewter goblet'", 2));
-        wornAndCeremonialDictionary.Add((41, 45), new Item("'Trencher, silver plated'", 4));
-        wornAndCeremonialDictionary.Add((46, 50), new Item("'Wooden gourd'", 1));
-        wornAndCeremonialDictionary.Add((51, 55), new Item("'Golden harp'", 0, 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((56, 60), new Item("'Hunter's horn'", 0, 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((61, 65), new Item("'Lute of Vaughn'", 120));
-        wornAndCeremonialDictionary.Add((66, 70), new Item("'Elven mandolin'", 100));
-        wornAndCeremonialDictionary.Add((71, 75), new Item("'Dragonclaw panpipes'", 500));
-        wornAndCeremonialDictionary.Add((76, 80), new Item("'Animal pelt'", 0, 0, "Cured. The value of any pelt ranges from 10 gp to 1000 gp depending on locale and rarity", 0, false, new Roll(10, 1000)));
-        wornAndCeremonialDictionary.Add((81, 85), new Item("'Decorative egg'", 100));
-        wornAndCeremonialDictionary.Add((86, 90), new Item("'Statue'", 0, 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((91, 95), new Item("'Carved wood'", 0, 0, "", 0, true));
-        wornAndCeremonialDictionary.Add((96, 100), new Item("'Miniature figurine'", 0, 0, "", 0, true));
+        handcraftedDictionary.Add((1, 5), new Item("'Wooden bird cage'", 20));
+        handcraftedDictionary.Add((6, 10), new Item("'Ivory pipe'", 50));
+        handcraftedDictionary.Add((11, 15), new Item("'Paper, ink & quill'", 15, 0, "These should come in a scroll case or box"));
+        handcraftedDictionary.Add((16, 20), new Item("'Silver snuff box'", 100));
+        handcraftedDictionary.Add((21, 25), new Item("'Mechnical toy'", 0, 0, "", 0, false, new Roll(2, 10)));
+        handcraftedDictionary.Add((26, 30), new Item("'China place settings'", 0, 0, "from 1-12 are found, value is per setting", 0, false, new Roll(2, 6, 0, 10), new Roll(1, 12)));
+        handcraftedDictionary.Add((31, 35), new Item("''Crystal vase", 0, 0, "", 0, false, new Roll(10, 10)));
+        handcraftedDictionary.Add((36, 40), new Item("'Pewter goblet'", 2));
+        handcraftedDictionary.Add((41, 45), new Item("'Trencher, silver plated'", 4));
+        handcraftedDictionary.Add((46, 50), new Item("'Wooden gourd'", 1));
+        handcraftedDictionary.Add((51, 55), new Item("'Golden harp'", 0, 0, "", 0, true));
+        handcraftedDictionary.Add((56, 60), new Item("'Hunter's horn'", 0, 0, "", 0, true));
+        handcraftedDictionary.Add((61, 65), new Item("'Lute of Vaughn'", 120));
+        handcraftedDictionary.Add((66, 70), new Item("'Elven mandolin'", 100));
+        handcraftedDictionary.Add((71, 75), new Item("'Dragonclaw panpipes'", 500));
+        handcraftedDictionary.Add((76, 80), new Item("'Animal pelt'", 0, 0, "Cured. The value of any pelt ranges from 10 gp to 1000 gp depending on locale and rarity", 0, false, new Roll(10, 1000)));
+        handcraftedDictionary.Add((81, 85), new Item("'Decorative egg'", 100));
+        handcraftedDictionary.Add((86, 90), new Item("'Statue'", 0, 0, "", 0, true));
+        handcraftedDictionary.Add((91, 95), new Item("'Carved wood'", 0, 0, "", 0, true));
+        handcraftedDictionary.Add((96, 100), new Item("'Miniature figurine'", 0, 0, "", 0, true));
     }
 
     private void InitAntiques()
     {
+        //FIXME: One of the items caused a crash. Which one?
         if (antiquitiesDictionary != null) return;
         antiquitiesDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
@@ -221,7 +222,7 @@ public class ExtraOrdinaryItems
     {
         InitHandCrafted(); //Replace with a delegate?
         int roll = 26;//CommonUtils.RollPercentage();
-        Item handcraftedEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item handcraftedEntry = handcraftedDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Item handcrafted = new Item(handcraftedEntry.name, handcraftedEntry.gp, handcraftedEntry.xp, handcraftedEntry.description, handcraftedEntry.pageNumber, handcraftedEntry.isRollValueTable, handcraftedEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for handcrafted item type which is... ");
         handcrafted.RollAmount();
@@ -232,9 +233,10 @@ public class ExtraOrdinaryItems
 
     private void RollAntiques()
     {
+        //FIXME: One of the items caused a crash. Which one?
         InitAntiques(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
-        Item antiquitiesEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item antiquitiesEntry = antiquitiesDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Item antiquities = new Item(antiquitiesEntry.name, antiquitiesEntry.gp, antiquitiesEntry.xp, antiquitiesEntry.description, antiquitiesEntry.pageNumber, antiquitiesEntry.isRollValueTable, antiquitiesEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for antiques item type which is... ");
         antiquities.RollAmount();
