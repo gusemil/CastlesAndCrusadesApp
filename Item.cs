@@ -13,40 +13,47 @@ public class Item
     public bool isRollValueTable;
     public ValueTable.ValueTableEntry material; //if ValueTable applies
     public Roll rollGpValue;
+    public int amount;
     //TODO: Store material for later use?
     //public ValueTable.ValueTableEntry material;
 
-    public Item(string name, int gpValue, string description = "", int pageNumber = 0, bool rollValueTable = false, Roll rollGpValue = null)
+    public Item(string name, int gpValue, string description = "", int pageNumber = 0, bool isRollValueTable = false, Roll rollGpValue = null, int amount = 1)
     {
         this.name = name;
         this.gpValue = gpValue;
         this.description = description;
         this.pageNumber = pageNumber;
-        this.isRollValueTable = rollValueTable;
+        this.isRollValueTable = isRollValueTable;
         this.rollGpValue = rollGpValue;
+        this.amount = amount;
     }
 
     public void RollValueTable()
     {
-        if (this.isRollValueTable)
+        if (isRollValueTable)
         {
-            this.material = ValueTable.RollValueTable(this.gpValue);
-            gpValue += this.material.gpValue;
+            material = ValueTable.RollValueTable(gpValue);
+            gpValue += material.gpValue;
         }
     }
 
     public void RollGpValue()
     {
         if (rollGpValue == null) return;
-        int roll = this.rollGpValue.RollXdY();
-        this.gpValue += roll;
+
+        for(int i=0; i < amount; i++)
+        {
+            int roll = rollGpValue.RollXdY();
+            gpValue += roll;
+        }
     }
 
     public void PrintInfo()
     {
         Console.WriteLine("Name: " + name + " gp value: " + gpValue);
+        if (amount > 1) Console.WriteLine("Amount: " + amount);
         if (description != "") Console.WriteLine("Description: " + description);
         if (pageNumber != 0) Console.WriteLine("Page number: " + pageNumber);
-        if (isRollValueTable) Console.WriteLine("Material: " + this.material.description);
+        if (isRollValueTable) Console.WriteLine("Material: " + material.description);
     }
 }
