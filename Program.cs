@@ -3,6 +3,7 @@ public class Program
 {
     private static Gems gems = new Gems();
     private static ExtraOrdinaryItems extraOrdinaryItems = new ExtraOrdinaryItems();
+    private static MagicItems magicItems = new MagicItems();
     static void Main(string[] args)
     {
         CommonUtils.InitRandom();
@@ -55,7 +56,7 @@ public class Program
         RollCoins(treasureLevel);
         RollGems(treasureLevel);
         RollExtraOrdinaryItems(treasureLevel);
-        //RollMagicItems(treasureLevel);
+        RollMagicItems(treasureLevel);
     }
 
     private static void RollCoins(int treasureLevel)
@@ -101,22 +102,33 @@ public class Program
     {
         CommonUtils.PageBreak();
         int extraOrdinaryItemsDictIndex = treasureLevel - 1;
-        int chanceToHaveGems = extraOrdinaryItems.extraOrdinaryItemsDictionary[extraOrdinaryItemsDictIndex].percentageChance;
-        bool hasItems = CommonUtils.RollPercentageSuccess(chanceToHaveGems);
-        Console.WriteLine(chanceToHaveGems + "% chance of the treasure containing extraordinary items. Your result: " + hasItems);
+        int chanceToHaveItems = extraOrdinaryItems.extraOrdinaryItemsDictionary[extraOrdinaryItemsDictIndex].percentageChance;
+        bool hasItems = CommonUtils.RollPercentageSuccess(chanceToHaveItems);
         int itemsAmount = 0;
-        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + itemsAmount + " extraordinary item");
         if (hasItems)
         {
-            Console.Write("Rolling extraordinary item type for " + itemsAmount + " items");
+            Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + itemsAmount + " extraordinary item");
             itemsAmount = extraOrdinaryItems.extraOrdinaryItemsDictionary[extraOrdinaryItemsDictIndex].itemsRoll.RollXdY();
+            Console.Write("Rolling extraordinary item type for " + itemsAmount + " items");
             extraOrdinaryItems.RollItemType(itemsAmount);
         }
     }
 
     private static void RollMagicItems(int treasureLevel)
     {
-
+        CommonUtils.PageBreak();
+        int magicItemsDictIndex = treasureLevel - 1;
+        int chanceToHaveItems = magicItems.magicItemsDictionary[magicItemsDictIndex].percentageChance;
+        bool hasItems = CommonUtils.RollPercentageSuccess(chanceToHaveItems);
+        Console.WriteLine(chanceToHaveItems + "% chance of the treasure containing magic items. Your result: " + hasItems);
+        int itemsAmount = 0;
+        if (hasItems)
+        {
+            itemsAmount = magicItems.magicItemsDictionary[magicItemsDictIndex].itemTypeRoll.RollXdY();
+            Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + itemsAmount + " magic items");
+            Console.Write("Rolling magic item type for " + itemsAmount + " items");
+            magicItems.RollItemType(itemsAmount);
+        }
     }
     #endregion
 

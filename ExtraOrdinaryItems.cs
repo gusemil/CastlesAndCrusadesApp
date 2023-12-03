@@ -12,7 +12,7 @@ public class ExtraOrdinaryItems
     private Dictionary<(int, int), Item> jewelryDictionary = null;
     private Dictionary<(int, int), Item> wornAndCeremonialDictionary = null;
     private Dictionary<(int, int), Item> handcraftedDictionary = null;
-    private Dictionary<(int, int), Item> antiquesDictionary = null;
+    private Dictionary<(int, int), Item> antiquitiesDictionary = null;
 
     public ExtraOrdinaryItems()
     {
@@ -47,7 +47,7 @@ public class ExtraOrdinaryItems
         itemTypeDictionary.Add((5, 8), new ExtraOrdinaryItemType(1, "'Jewelry'"));
         itemTypeDictionary.Add((9, 12), new ExtraOrdinaryItemType(2, "'Worn & Ceremonial Items'"));
         itemTypeDictionary.Add((13, 16), new ExtraOrdinaryItemType(3, "'Hand Crafted Items'"));
-        itemTypeDictionary.Add((17, 20), new ExtraOrdinaryItemType(4, "'Antiques'"));
+        itemTypeDictionary.Add((17, 20), new ExtraOrdinaryItemType(4, "'Antiquities'"));
     }
 
     private void InitExpertWeapons()
@@ -159,29 +159,29 @@ public class ExtraOrdinaryItems
 
     private void InitAntiques()
     {
-        if (antiquesDictionary != null) return;
-        antiquesDictionary = new Dictionary<(int, int), Item>();
+        if (antiquitiesDictionary != null) return;
+        antiquitiesDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
-        antiquesDictionary.Add((1, 5), new Item("'Book(s)'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(10, 10)));
-        antiquesDictionary.Add((6, 10), new Item("'Charts'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(5, 10)));
-        antiquesDictionary.Add((11, 15), new Item("'Map'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(5, 10)));
-        antiquesDictionary.Add((16, 20), new Item("'Scroll'", 0, 0, "", 0, false, new Roll(10, 10)));
-        antiquesDictionary.Add((21, 25), new Item("'Stone'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
-        antiquesDictionary.Add((26, 30), new Item("'Banner'", 250));
-        antiquesDictionary.Add((31, 35), new Item("'Painting'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
-        antiquesDictionary.Add((36, 40), new Item("'Rug'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
-        antiquesDictionary.Add((41, 45), new Item("'Tapestry'", 0, 0, "", 0, false, new Roll(10, 10, 100)));
-        antiquesDictionary.Add((46, 50), new Item("'Trophy'", 0, 0, "", 0, false, new Roll(10, 10)));
-        antiquesDictionary.Add((51, 55), new Item("'Brazier'", 0, 0, "", 0, true));
-        antiquesDictionary.Add((56, 60), new Item("'Candlelabra'", 0, 0, "", 0, true));
-        antiquesDictionary.Add((61, 65), new Item("'Coffer'", 0, 0, "", 0, true));
-        antiquesDictionary.Add((66, 70), new Item("'Urn'", 0, 0, "", 0, true));
-        antiquesDictionary.Add((71, 75), new Item("'Death Mask'", 0, 0, "", 0, true));
-        antiquesDictionary.Add((76, 80), new Item("'Hour glass'", 0, 0, "", 0, true));
-        antiquesDictionary.Add((81, 85), new Item("'Music box'", 0, 0, "", 0, true));
-        antiquesDictionary.Add((86, 90), new Item("'Mirror'", 0, 0, "", 0, true));
-        antiquesDictionary.Add((91, 95), new Item("'Wine'", 0, 0, "", 0, false, new Roll(2, 10, 10)));
-        antiquesDictionary.Add((96, 100), new Item("'Troll knuckles'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((1, 5), new Item("'Book(s)'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(10, 10)));
+        antiquitiesDictionary.Add((6, 10), new Item("'Charts'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(5, 10)));
+        antiquitiesDictionary.Add((11, 15), new Item("'Map'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(5, 10)));
+        antiquitiesDictionary.Add((16, 20), new Item("'Scroll'", 0, 0, "", 0, false, new Roll(10, 10)));
+        antiquitiesDictionary.Add((21, 25), new Item("'Stone'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
+        antiquitiesDictionary.Add((26, 30), new Item("'Banner'", 250));
+        antiquitiesDictionary.Add((31, 35), new Item("'Painting'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
+        antiquitiesDictionary.Add((36, 40), new Item("'Rug'", 0, 0, "", 0, false, new Roll(10, 10, 10)));
+        antiquitiesDictionary.Add((41, 45), new Item("'Tapestry'", 0, 0, "", 0, false, new Roll(10, 10, 100)));
+        antiquitiesDictionary.Add((46, 50), new Item("'Trophy'", 0, 0, "", 0, false, new Roll(10, 10)));
+        antiquitiesDictionary.Add((51, 55), new Item("'Brazier'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((56, 60), new Item("'Candlelabra'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((61, 65), new Item("'Coffer'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((66, 70), new Item("'Urn'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((71, 75), new Item("'Death Mask'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((76, 80), new Item("'Hour glass'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((81, 85), new Item("'Music box'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((86, 90), new Item("'Mirror'", 0, 0, "", 0, true));
+        antiquitiesDictionary.Add((91, 95), new Item("'Wine'", 0, 0, "", 0, false, new Roll(2, 10, 10)));
+        antiquitiesDictionary.Add((96, 100), new Item("'Troll knuckles'", 0, 0, "", 0, true));
     }
 
     private void RollExpertWeapon()
@@ -234,13 +234,13 @@ public class ExtraOrdinaryItems
     {
         InitAntiques(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
-        Item antiquesEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
-        Item antiques = new Item(antiquesEntry.name, antiquesEntry.gp, antiquesEntry.xp, antiquesEntry.description, antiquesEntry.pageNumber, antiquesEntry.isRollValueTable, antiquesEntry.rollGpValue);
+        Item antiquitiesEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item antiquities = new Item(antiquitiesEntry.name, antiquitiesEntry.gp, antiquitiesEntry.xp, antiquitiesEntry.description, antiquitiesEntry.pageNumber, antiquitiesEntry.isRollValueTable, antiquitiesEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for antiques item type which is... ");
-        antiques.RollAmount();
-        antiques.RollGpValue();
-        antiques.RollValueTable();
-        antiques.PrintInfo();
+        antiquities.RollAmount();
+        antiquities.RollGpValue();
+        antiquities.RollValueTable();
+        antiquities.PrintInfo();
     }
 
     public void RollItemType(int itemsAmount)
