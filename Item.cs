@@ -16,14 +16,12 @@ public class Item
     public Roll rollGpValue;
     public int amount = 1;
     private Roll rollAmount;
-    //TODO: Store material for later use?
-    //public ValueTable.ValueTableEntry material;
 
     public Item(string name, int gpValue, int xp = 0, string description = "", int pageNumber = 0, bool isRollValueTable = false, Roll rollGpValue = null, Roll rollAmount = null)
     {
         this.name = name;
         this.gp = gpValue;
-        this.xp = 0;
+        this.xp = xp;
         this.description = description;
         this.pageNumber = pageNumber;
         this.isRollValueTable = isRollValueTable;
@@ -61,7 +59,7 @@ public class Item
 
     public void PrintInfo()
     {
-        Console.WriteLine("Name: " + name + " gp value: " + gp + " amount: " + amount);
+        Console.WriteLine("Name: " + name + " gp value: " + gp + " amount: " + amount + " xp: " + xp);
         if (description != "") Console.WriteLine("Description: " + description);
         if (pageNumber != 0) Console.WriteLine("Page number: " + pageNumber);
         if (isRollValueTable) Console.WriteLine("Material: " + material.description);

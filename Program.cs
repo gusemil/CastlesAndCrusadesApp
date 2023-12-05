@@ -10,6 +10,7 @@ public class Program
         bool mainLoop = true;
         bool reroll = true;
         int treasureLevel = 0;
+        const int MAX_TREASURE_LEVEL = 18;
         Console.WriteLine("Welcome, Castle Keeper!");
         while (mainLoop)
         {
@@ -20,7 +21,7 @@ public class Program
                 Console.WriteLine("\nChoose a number between 1-18");
                 string treasureLevelInput = Console.ReadLine();
                 int treasureLevelInputInt = Convert.ToInt32(treasureLevelInput);
-                if (treasureLevelInputInt > 0 && treasureLevelInputInt <= 18)
+                if (treasureLevelInputInt > 0 && treasureLevelInputInt <= MAX_TREASURE_LEVEL)
                 {
                     treasureLevel = treasureLevelInputInt;
                     RollTreasure(treasureLevel);
@@ -32,7 +33,7 @@ public class Program
             }
             else if (input.Key == ConsoleKey.R)
             {
-                treasureLevel = CommonUtils.RollNumber(1, 18);
+                treasureLevel = CommonUtils.RollNumber(1, MAX_TREASURE_LEVEL);
                 RollTreasure(treasureLevel);
             }
             else
