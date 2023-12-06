@@ -10,6 +10,10 @@ public class MagicItems
     private Dictionary<(int, int), MagicItemType> magicItemTypesDictionary = null;
     private Dictionary<(int, int), Item> potionsDictionary = null;
     private Dictionary<(int, int), Item> scrollsDictionary = null;
+    private Dictionary<(int, int), MagicItemType> magicWeaponTypeDictionary = null;
+    private Dictionary<(int, int), MagicItemType> magicSwordTypeDictionary = null;
+    private Dictionary<(int, int), Item> specialSwordsDictionary = null;
+    private Dictionary<(int, int), ItemBonus> itemBonusDictionary = null;
 
     public MagicItems()
     {
@@ -54,7 +58,7 @@ public class MagicItems
     {
         if (potionsDictionary != null) return;
         potionsDictionary = new Dictionary<(int, int), Item>();
-        
+
         potionsDictionary.Add((1, 3), new Item("'Aid'", 400, 200));
         potionsDictionary.Add((4, 6), new Item("'Bless oil'", 300, 100));
         potionsDictionary.Add((7, 9), new Item("'Blur", 400, 200));
@@ -106,7 +110,7 @@ public class MagicItems
         scrollsDictionary.Add((46, 50), new Item("'7 Spell Level", 900, 700));
         scrollsDictionary.Add((51, 55), new Item("'8 Spell Level'", 1000, 800));
         scrollsDictionary.Add((56, 60), new Item("'9 Spell Level'", 1100, 900));
-        scrollsDictionary.Add((61, 65), new Item("'10 Spell Level'", 1200,1000));
+        scrollsDictionary.Add((61, 65), new Item("'10 Spell Level'", 1200, 1000));
         scrollsDictionary.Add((66, 68), new Item("'11 Spell Level'", 1300, 1100));
         scrollsDictionary.Add((69, 71), new Item("'12 Spell Level'", 1400, 1200));
         scrollsDictionary.Add((72, 74), new Item("'13 Spell Level'", 1500, 1300));
@@ -123,6 +127,40 @@ public class MagicItems
         scrollsDictionary.Add((97, 98), new Item("'Shape Change'", 1100, 900));
         scrollsDictionary.Add((99, 100), new Item("'Clone'", 1100, 900));
     }
+
+    private void InitMagicWeaponType()
+    {
+        if (magicWeaponTypeDictionary != null) return;
+        magicWeaponTypeDictionary = new Dictionary<(int, int), MagicItemType>();
+
+        magicWeaponTypeDictionary.Add((1, 40), new MagicItemType(0, "Swords"));
+        magicWeaponTypeDictionary.Add((41, 50), new MagicItemType(1, "Special Sword"));
+        magicWeaponTypeDictionary.Add((51, 90), new MagicItemType(2, "Miscellaneous Weapons"));
+        magicWeaponTypeDictionary.Add((91, 100), new MagicItemType(3, "Special Weapon"));
+    }
+
+    private void InitMagicSwordType()
+    {
+        if (magicSwordTypeDictionary != null) return;
+        magicSwordTypeDictionary = new Dictionary<(int, int), MagicItemType>();
+
+        magicSwordTypeDictionary.Add((1, 10), new MagicItemType(0, "Bastard Sword"));
+        magicSwordTypeDictionary.Add((11, 30), new MagicItemType(1, "Broad Sword, Falchion"));
+        magicSwordTypeDictionary.Add((31, 50), new MagicItemType(2, "Short Sword, Scimitar, Rapier"));
+        magicSwordTypeDictionary.Add((51, 90), new MagicItemType(3, "Long Sword"));
+        magicSwordTypeDictionary.Add((91, 100), new MagicItemType(3, "Two Handed Sword"));
+    }
+    private void InitItemBonus()
+    {
+        if (itemBonusDictionary != null) return;
+        itemBonusDictionary = new Dictionary<(int, int), ItemBonus>();
+
+        itemBonusDictionary.Add((1, 45), new ItemBonus(1, 1000, 250));
+        itemBonusDictionary.Add((46, 75), new ItemBonus(2, 4000, 750));
+        itemBonusDictionary.Add((76, 90), new ItemBonus(3, 9000, 1200));
+        itemBonusDictionary.Add((91, 98), new ItemBonus(4, 16000, 1750));
+        itemBonusDictionary.Add((99, 100), new ItemBonus(5, 25000, 2500));
+    }
     public void RollItemType(int itemsAmount)
     {
         InitMagicItems();
@@ -131,7 +169,7 @@ public class MagicItems
             int roll = CommonUtils.RollPercentage();
             MagicItemType itemType = magicItemTypesDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
 
-            Console.WriteLine("\nRolled " + roll + " for magic item type which is " + itemType.subTableDescription + " and table index " + (itemType.subTableIndex +1));
+            Console.WriteLine("\nRolled " + roll + " for magic item type which is " + itemType.subTableDescription + " and table index " + (itemType.subTableIndex + 1));
 
             switch (itemType.subTableIndex)
             {
@@ -141,29 +179,29 @@ public class MagicItems
                 case 1:
                     RollScrolls();
                     break;
-                    /*
-                case 2:
-                    RollWeapons();
-                    break;
-                case 3:
-                    RollArmorAndShields();
-                    break;
-                case 4:
-                    RollMiscMagic();
-                    break;
-                case 5:
-                    RollRings();
-                    break;
-                case 6:
-                    RollRodsStavesWands();
-                    break;
-                case 7:
-                    RollCursedItems();
-                    break;
-                case 8:
-                    RollArtifacts();
-                    break;
-                */
+                /*
+            case 2:
+                RollWeapons();
+                break;
+            case 3:
+                RollArmorAndShields();
+                break;
+            case 4:
+                RollMiscMagic();
+                break;
+            case 5:
+                RollRings();
+                break;
+            case 6:
+                RollRodsStavesWands();
+                break;
+            case 7:
+                RollCursedItems();
+                break;
+            case 8:
+                RollArtifacts();
+                break;
+            */
                 default:
                     RollPotions();
                     //Console.WriteLine("\nSomething went wrong");
@@ -194,9 +232,42 @@ public class MagicItems
 
     private void RollWeapons()
     {
+        InitMagicWeaponType();
+        int roll = CommonUtils.RollPercentage();
+        MagicItemType itemType = magicWeaponTypeDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
 
+        Console.WriteLine("\nRolled " + roll + " for magic item type which is " + itemType.subTableDescription + " and table index " + (itemType.subTableIndex + 1));
+
+        switch (itemType.subTableIndex)
+        {
+            case 0:
+                RollMagicSword();
+                break;
+            case 1:
+                RollSpecialSword()
+                break;
+            case 2:
+                RollMiscWeapon();
+                break;
+            case 3:
+                RollSpecialWeapon();
+                break;
+            default:
+                Console.WriteLine("\nSomething went wrong");
+                break;
+        }
     }
-    
+
+    public ItemBonus RollItemBonus()
+    {
+        InitItemBonus();
+
+        int roll = CommonUtils.RollPercentage();
+        ItemBonus itemBonusEntry = itemBonusDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Console.WriteLine("Rolled " + roll + " for item bonus entry which is: +" + itemBonusEntry.bonus.ToString());
+        return itemBonusEntry;
+    }
+
     private void RollArmorAndShields()
     {
 
@@ -250,6 +321,20 @@ public class MagicItems
         {
             this.subTableIndex = subTableIndex;
             this.subTableDescription = subTableDescription;
+        }
+    }
+
+    public struct ItemBonus
+    {
+        public int bonus;
+        public int gp;
+        public int xp;
+
+        public ItemBonus(int bonus, int gp, int xp)
+        {
+            this.bonus = bonus;
+            this.gp = gp;
+            this.xp = xp;
         }
     }
 }
