@@ -50,9 +50,9 @@ public class ExtraOrdinaryItems
         itemTypeDictionary.Add((17, 20), new ExtraOrdinaryItemType(4, "'Antiquities'"));
     }
 
-    private void InitExpertWeapons()
+    private Dictionary<(int, int), Item> InitExpertWeapons()
     {
-        if (expertWeaponsDictionary != null) return;
+        if (expertWeaponsDictionary != null) return expertWeaponsDictionary;
         expertWeaponsDictionary = new Dictionary<(int, int), Item>();
         expertWeaponsDictionary.Add((1, 5), new Item("'Arrow'", 1, 0));
         expertWeaponsDictionary.Add((6, 10), new Item("'Battle Axe'", 100, 0));
@@ -74,11 +74,13 @@ public class ExtraOrdinaryItems
         expertWeaponsDictionary.Add((86, 90), new Item("'Sword'", 0, 0, "'Type is Castle Keeper's Choice. Value varies'"));
         expertWeaponsDictionary.Add((91, 95), new Item("'Trident'", 100));
         expertWeaponsDictionary.Add((96, 100), new Item("'Two-Handed Axe'", 300));
+
+        return expertWeaponsDictionary;
     }
 
-    private void InitJewelry()
+    private Dictionary<(int, int), Item> InitJewelry()
     {
-        if (jewelryDictionary != null) return;
+        if (jewelryDictionary != null) return jewelryDictionary;
         jewelryDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
         jewelryDictionary.Add((1, 5), new Item("'Ankle Chain'", 0, 0, "", 0, true));
@@ -101,11 +103,13 @@ public class ExtraOrdinaryItems
         jewelryDictionary.Add((86, 90), new Item("'Toe Ring'", 0, 0, "", 0, true));
         jewelryDictionary.Add((91, 95), new Item("'Torque'", 0, 0, "", 0, true));
         jewelryDictionary.Add((96, 100), new Item("'Waist Chain'", 0, 0, "", 0, true));
+
+        return jewelryDictionary;
     }
 
-    private void InitWornAndCeremonial()
+    private Dictionary<(int, int), Item> InitWornAndCeremonial()
     {
-        if (wornAndCeremonialDictionary != null) return;
+        if (wornAndCeremonialDictionary != null) return wornAndCeremonialDictionary;
         wornAndCeremonialDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
         wornAndCeremonialDictionary.Add((1, 5), new Item("'Coronet'", 0, 0, "", 0, true));
@@ -128,11 +132,13 @@ public class ExtraOrdinaryItems
         wornAndCeremonialDictionary.Add((86, 90), new Item("'Mantle'", 0, 0, "", 0, false, new Roll(1, 4)));
         wornAndCeremonialDictionary.Add((91, 95), new Item("'Surcoat'", 0, 0, "", 0, false, new Roll(3, 10)));
         wornAndCeremonialDictionary.Add((96, 100), new Item("'Tabard'", 0, 0, "", 0, false, new Roll(2, 10)));
+
+        return wornAndCeremonialDictionary;
     }
 
-    private void InitHandCrafted()
+    private Dictionary<(int, int), Item> InitHandCrafted()
     {
-        if (handcraftedDictionary != null) return;
+        if (handcraftedDictionary != null) return handcraftedDictionary;
         handcraftedDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
         handcraftedDictionary.Add((1, 5), new Item("'Wooden bird cage'", 20));
@@ -155,12 +161,14 @@ public class ExtraOrdinaryItems
         handcraftedDictionary.Add((86, 90), new Item("'Statue'", 0, 0, "", 0, true));
         handcraftedDictionary.Add((91, 95), new Item("'Carved wood'", 0, 0, "", 0, true));
         handcraftedDictionary.Add((96, 100), new Item("'Miniature figurine'", 0, 0, "", 0, true));
+
+        return handcraftedDictionary;
     }
 
-    private void InitAntiques()
+    private Dictionary<(int, int), Item> InitAntiques()
     {
         //FIXME: One of the items caused a crash. Which one?
-        if (antiquitiesDictionary != null) return;
+        if (antiquitiesDictionary != null) return antiquitiesDictionary;
         antiquitiesDictionary = new Dictionary<(int, int), Item>();
         //gp value of all is based on the value table
         antiquitiesDictionary.Add((1, 5), new Item("'Book(s)'", 0, 0, "Books, charts and maps can contain anything from histories amd geographical references to treasure maps and nautical charts", 0, false, new Roll(10, 10)));
@@ -183,20 +191,27 @@ public class ExtraOrdinaryItems
         antiquitiesDictionary.Add((86, 90), new Item("'Mirror'", 0, 0, "", 0, true));
         antiquitiesDictionary.Add((91, 95), new Item("'Wine'", 0, 0, "", 0, false, new Roll(2, 10, 10)));
         antiquitiesDictionary.Add((96, 100), new Item("'Troll knuckles'", 0, 0, "", 0, true));
+
+        return antiquitiesDictionary;
     }
 
-    private void RollExpertWeapon()
+    private void RollExpertWeapon(Dictionary<(int, int), Item> dict)
     {
+        CommonUtils.RollItemTable(dict, "Extra ordinary weapon");
+        /*
         InitExpertWeapons(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item expertWeaponEntry = expertWeaponsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Item expertWeapon = new Item(expertWeaponEntry.name, expertWeaponEntry.gp, expertWeaponEntry.xp, expertWeaponEntry.description, expertWeaponEntry.pageNumber, expertWeaponEntry.isRollValueTable, expertWeaponEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for extraordinary weapon type which is... ");
         expertWeapon.PrintInfo();
+        */
     }
 
-    private void RollJewelry()
+    private void RollJewelry(Dictionary<(int, int), Item> dict)
     {
+        CommonUtils.RollItemTable(dict, "Jewelry");
+        /*
         InitJewelry(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item jewelryEntry = jewelryDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
@@ -204,10 +219,13 @@ public class ExtraOrdinaryItems
         Console.WriteLine("Rolled " + roll + " for jewelry item type which is... ");
         jewelry.RollValueTable();
         jewelry.PrintInfo();
+        */
     }
 
-    private void RollWornAndCeremonial()
+    private void RollWornAndCeremonial(Dictionary<(int, int), Item> dict)
     {
+        CommonUtils.RollItemTable(dict, "Worn and ceremonial");
+        /*
         InitWornAndCeremonial(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item wornAndCeremonialEntry = wornAndCeremonialDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
@@ -216,10 +234,13 @@ public class ExtraOrdinaryItems
         wornAndCeremonial.RollGpValue();
         wornAndCeremonial.RollValueTable();
         wornAndCeremonial.PrintInfo();
+        */
     }
 
-    private void RollHandcrafted()
+    private void RollHandcrafted(Dictionary<(int, int), Item> dict)
     {
+        CommonUtils.RollItemTable(dict, "Handcrafted");
+        /*
         InitHandCrafted(); //Replace with a delegate?
         int roll = 26;//CommonUtils.RollPercentage();
         Item handcraftedEntry = handcraftedDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
@@ -229,10 +250,13 @@ public class ExtraOrdinaryItems
         handcrafted.RollGpValue();
         handcrafted.RollValueTable();
         handcrafted.PrintInfo();
+        */
     }
 
-    private void RollAntiques()
+    private void RollAntiques(Dictionary<(int, int), Item> dict)
     {
+        CommonUtils.RollItemTable(dict, "Antiquities");
+        /*
         //FIXME: One of the items caused a crash. Which one?
         InitAntiques(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
@@ -243,6 +267,7 @@ public class ExtraOrdinaryItems
         antiquities.RollGpValue();
         antiquities.RollValueTable();
         antiquities.PrintInfo();
+        */
     }
 
     public void RollItemType(int itemsAmount)
@@ -258,19 +283,19 @@ public class ExtraOrdinaryItems
             switch (itemType.subTableIndex)
             {
                 case 0:
-                    RollExpertWeapon();
+                    RollExpertWeapon(InitExpertWeapons());
                     break;
                 case 1:
-                    RollJewelry();
+                    RollJewelry(InitJewelry());
                     break;
                 case 2:
-                    RollWornAndCeremonial();
+                    RollWornAndCeremonial(InitWornAndCeremonial());
                     break;
                 case 3:
-                    RollHandcrafted();
+                    RollHandcrafted(InitHandCrafted());
                     break;
                 case 4:
-                    RollAntiques();
+                    RollAntiques(InitAntiques());
                     break;
                 default:
                     Console.WriteLine("Something went wrong");

@@ -21,6 +21,6 @@ public class MagicItem : Item
         itemBonus = magicItem.RollItemBonus();
         gp += itemBonus.gp;
         xp += itemBonus.xp;
-        description += "Bonus: " + itemBonus.bonus.ToString();
+        description += "Bonus: +" + itemBonus.bonus.ToString();
     }
 }

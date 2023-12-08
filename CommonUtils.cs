@@ -54,6 +54,18 @@ public static class CommonUtils
         return result;
     }
 
+    public static void RollItemTable(Dictionary<(int, int), Item> dict, string itemType)
+    {
+        int roll = CommonUtils.RollPercentage();
+        Item dictEntry = dict.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        Item item = new Item(dictEntry.name, dictEntry.gp, dictEntry.xp, dictEntry.description, dictEntry.pageNumber, dictEntry.isRollValueTable, dictEntry.rollGpValue, dictEntry.rollAmount);
+        Console.WriteLine("Rolled " + roll + " for " + itemType + "which is... ");
+        item.RollAmount();
+        item.RollGpValue();
+        item.RollValueTable();
+        item.PrintInfo();
+    }
+
     //TODO find item from dictionary method
     public static Random RandomInstance { get => randomInstance; private set => randomInstance = value; }
 }

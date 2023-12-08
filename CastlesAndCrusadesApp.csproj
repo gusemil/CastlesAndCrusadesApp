@@ -48,6 +48,8 @@
     <Compile Include="ExtraOrdinaryItems.cs" />
     <Compile Include="Gems.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="MagicItem.cs" />
+    <Compile Include="MagicItemBase.cs" />
     <Compile Include="MagicItems.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

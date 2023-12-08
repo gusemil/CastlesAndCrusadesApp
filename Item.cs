@@ -15,7 +15,7 @@ public class Item
     public ValueTable.ValueTableEntry material; //if ValueTable applies
     public Roll rollGpValue;
     public int amount = 1;
-    protected Roll rollAmount;
+    public Roll rollAmount;
 
     public Item(string name, int gpValue, int xp = 0, string description = "", int pageNumber = 0, bool isRollValueTable = false, Roll rollGpValue = null, Roll rollAmount = null)
     {
