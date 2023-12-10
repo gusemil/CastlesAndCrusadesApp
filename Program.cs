@@ -147,6 +147,14 @@ public class Program
             magicItems.RollItemType(itemsAmount);
         }
     }
+
+    //TODO: refactor item rolls later
+    /*
+    private static void RollItems()
+    {
+
+    }
+    */
     #endregion
 
     #region SubTables

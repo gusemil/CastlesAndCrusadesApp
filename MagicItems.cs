@@ -15,6 +15,8 @@ public class MagicItems
     private Dictionary<(int, int), MagicItemContainer> specialSwordDictionary = null;
     private Dictionary<(int, int), ItemBonus> itemBonusDictionary = null;
 
+    private Dictionary<(int, int), MagicItemType> baneDictionary = null;
+
     public MagicItems()
     {
         if (magicItemsDictionary != null) return;
@@ -161,7 +163,9 @@ public class MagicItems
         specialSwordDictionary = new Dictionary<(int, int), MagicItemContainer>();
 
         //TODO: delegate for +3 bane weapon roll
-        specialSwordDictionary.Add((1, 8), new MagicItemContainer(0, "Bane Sword", new MagicItem("Bane Sword", 13500, 4500, "")));
+        specialSwordDictionary.Add((1, 8), 
+            new MagicItemContainer(0, "Bane Sword", new MagicItem("Bane Sword", 13500, 4500, 
+            "Normally +1 weapon but against designated foe a +3 weapon with extra 2d6 damage", 330, false, null, null, false, InitBaneDictionary())));
         /*
         specialSwordDictionary.Add((11, 30), new MagicItemType(1, "Broad Sword, Falchion"));
         specialSwordDictionary.Add((31, 50), new MagicItemType(2, "Short Sword, Scimitar, Rapier"));
@@ -353,11 +357,25 @@ public class MagicItems
 
     }
 
-    private void RollOptionalTable()
+    #region InitOptionalTables
+    
+    private Dictionary<(int,int), MagicItemType> InitBaneDictionary()
     {
+        if (baneDictionary != null) return baneDictionary;
+        baneDictionary = new Dictionary<(int, int), MagicItemType>();
 
+        baneDictionary.Add((1, 1), new MagicItemType(0, "Undead"));
+        baneDictionary.Add((2, 2), new MagicItemType(1, "Creatures able to cast spells"));
+        baneDictionary.Add((3, 4), new MagicItemType(2, "Orc"));
+        baneDictionary.Add((5, 6), new MagicItemType(3, "Goblin"));
+        baneDictionary.Add((7, 8), new MagicItemType(4, "Giant"));
+        baneDictionary.Add((9, 10), new MagicItemType(5, "Lycanthropes"));
+        baneDictionary.Add((11, 11), new MagicItemType(6, "Demons/Devils"));
+        baneDictionary.Add((12, 12), new MagicItemType(7, "Dragons"));
+
+        return baneDictionary;
     }
-
+    #endregion
     public struct MagicItemsTable
     {
         public int percentageChance;
@@ -372,7 +390,7 @@ public class MagicItems
         }
     }
 
-    private struct MagicItemType
+    public struct MagicItemType
     {
         public int subTableIndex;
         public string subTableDescription;
