@@ -54,9 +54,9 @@ public class MagicItems
         magicItemTypesDictionary.Add((100, 100), new MagicItemType(8, "'Artifacts'"));
     }
 
-    private void InitPotions()
+    private Dictionary<(int, int), Item> InitPotions()
     {
-        if (potionsDictionary != null) return;
+        if (potionsDictionary != null) return potionsDictionary;
         potionsDictionary = new Dictionary<(int, int), Item>();
 
         potionsDictionary.Add((1, 3), new Item("'Aid'", 400, 200));
@@ -93,11 +93,13 @@ public class MagicItems
         potionsDictionary.Add((94, 96), new Item("'Water Walk'", 900, 700));
         potionsDictionary.Add((97, 99), new Item("'Remove Disease'", 500, 300));
         potionsDictionary.Add((100, 100), new Item("'Trap the Soul'", 1100, 900, "Greenish, thick liquid, usually held in a crystal jar. Within the jar is a small topaz gem. The potion has no taste. Consuming the potion forces the user into the gem as if by a trap the soul spell"));
+
+        return potionsDictionary;
     }
 
-    private void InitScrolls()
+    private Dictionary<(int, int), Item> InitScrolls()
     {
-        if (scrollsDictionary != null) return;
+        if (scrollsDictionary != null) return scrollsDictionary;
         scrollsDictionary = new Dictionary<(int, int), Item>();
 
         //TODO: roll random spells for spell levels?
@@ -126,6 +128,8 @@ public class MagicItems
         scrollsDictionary.Add((95, 96), new Item("'Create Greater Undead'", 1000, 800));
         scrollsDictionary.Add((97, 98), new Item("'Shape Change'", 1100, 900));
         scrollsDictionary.Add((99, 100), new Item("'Clone'", 1100, 900));
+
+        return scrollsDictionary;
     }
 
     private void InitMagicWeaponType()
@@ -189,10 +193,10 @@ public class MagicItems
             switch (itemType.subTableIndex)
             {
                 case 0:
-                    RollPotions();
+                    RollPotions(InitPotions());
                     break;
                 case 1:
-                    RollScrolls();
+                    RollScrolls(InitScrolls());
                     break;
                 case 2:
                     RollWeapons();
@@ -225,24 +229,30 @@ public class MagicItems
         }
     }
 
-    private void RollPotions()
+    private void RollPotions(Dictionary<(int, int), Item> dict)
     {
+        CommonUtils.RollItemTable(dict, "Potions");
+        /*
         InitPotions(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item potionsEntry = potionsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Item potion = new Item(potionsEntry.name, potionsEntry.gp, potionsEntry.xp, potionsEntry.description, potionsEntry.pageNumber, potionsEntry.isRollValueTable, potionsEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for potion type which is... ");
         potion.PrintInfo();
+        */
     }
 
-    private void RollScrolls()
+    private void RollScrolls(Dictionary<(int, int), Item> dict)
     {
+        CommonUtils.RollItemTable(dict, "Scrolls");
+        /*
         InitScrolls(); //Replace with a delegate?
         int roll = CommonUtils.RollPercentage();
         Item scrollsEntry = scrollsDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
         Item scroll = new Item(scrollsEntry.name, scrollsEntry.gp, scrollsEntry.xp, scrollsEntry.description, scrollsEntry.pageNumber, scrollsEntry.isRollValueTable, scrollsEntry.rollGpValue);
         Console.WriteLine("Rolled " + roll + " for scroll type which is... ");
         scroll.PrintInfo();
+        */
     }
 
     private void RollWeapons()

@@ -1,6 +1,7 @@
 ﻿using System;
 public class Program
 {
+    private static Coins coins = new Coins();
     private static Gems gems = new Gems();
     private static ExtraOrdinaryItems extraOrdinaryItems = new ExtraOrdinaryItems();
     private static MagicItems magicItems = new MagicItems();
@@ -79,17 +80,16 @@ public class Program
     private static void RollCoins(int treasureLevel)
     {
         CommonUtils.PageBreak();
-        Coins newCoins = new Coins();
         int coinsDictIndex = treasureLevel - 1;
-        int chanceToHaveCoins = newCoins.coinsDictionary[coinsDictIndex].percentageChance;
+        int chanceToHaveCoins = coins.coinsDictionary[coinsDictIndex].percentageChance;
         bool hasCoins = CommonUtils.RollPercentageSuccess(chanceToHaveCoins);
         Console.WriteLine(chanceToHaveCoins + "% chance of the treasure containing gold coins. Your result: " + hasCoins);
-        int coins = 0;
+        int coinAmount = 0;
         if (hasCoins)
         {
-            coins = newCoins.coinsDictionary[coinsDictIndex].coinsRoll.RollXdY();
+            coinAmount = coins.coinsDictionary[coinsDictIndex].coinsRoll.RollXdY();
         }
-        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + coins + " gold pieces");
+        Console.WriteLine("The treasure with treasure level " + treasureLevel + " contains " + coinAmount + " gold pieces");
     }
 
     private static void RollGems(int treasureLevel)
