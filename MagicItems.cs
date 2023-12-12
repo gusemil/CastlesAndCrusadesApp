@@ -12,10 +12,11 @@ public class MagicItems
     private Dictionary<(int, int), Item> scrollsDictionary = null;
     private Dictionary<(int, int), MagicItemType> magicWeaponTypeDictionary = null;
     private Dictionary<(int, int), MagicItemType> magicSwordTypeDictionary = null;
-    private Dictionary<(int, int), MagicItemContainer> specialSwordDictionary = null;
+    private Dictionary<(int, int), MagicItem> specialSwordDictionary = null;
     private Dictionary<(int, int), ItemBonus> itemBonusDictionary = null;
 
     private Dictionary<(int, int), MagicItemType> baneDictionary = null;
+    private Dictionary<(int, int), MagicItemType> dragonDictionary = null;
 
     public MagicItems()
     {
@@ -160,12 +161,16 @@ public class MagicItems
     private void InitSpecialSword()
     {
         if (specialSwordDictionary != null) return;
-        specialSwordDictionary = new Dictionary<(int, int), MagicItemContainer>();
+        specialSwordDictionary = new Dictionary<(int, int), MagicItem>();
 
         //TODO: delegate for +3 bane weapon roll
-        specialSwordDictionary.Add((1, 8), 
-            new MagicItemContainer(0, "Bane Sword", new MagicItem("Bane Sword", 13500, 4500, 
-            "Normally +1 weapon but against designated foe a +3 weapon with extra 2d6 damage", 330, false, null, null, false, InitBaneDictionary())));
+        specialSwordDictionary.Add((1, 8),  new MagicItem("Bane Sword", 13500, 4500, 
+            "Normally +1 weapon but against designated foe a +3 weapon with extra 2d6 damage", 330, false, null, null, false, InitBaneWeapon()));
+        specialSwordDictionary.Add((9, 16), new MagicItem("Sword of Dancing", 12500, 4100, "", 331));
+        specialSwordDictionary.Add((17, 24), new MagicItem("Sword of Defending +4", 24500, 8100, 
+            "Allows the wielder to transfer all or any of the sword's magical bonus to AC. Any bonus transfered is not added to the attack roll", 331));
+        specialSwordDictionary.Add((25, 32), new MagicItem("Dragon Slayer +2/+4", 29000, 7250,
+            "Normally +2 weapon, but against dragons of the rolled type +4 BtH and double damage", 331, false, null, null, false, InitDragonType()));
         /*
         specialSwordDictionary.Add((11, 30), new MagicItemType(1, "Broad Sword, Falchion"));
         specialSwordDictionary.Add((31, 50), new MagicItemType(2, "Short Sword, Scimitar, Rapier"));
@@ -304,7 +309,8 @@ public class MagicItems
 
     private void RollSpecialSword()
     {
-
+        RollMagicSword(false);
+        InitSpecialSword();
     }
 
     private void RollMiscWeapon()
@@ -359,7 +365,7 @@ public class MagicItems
 
     #region InitOptionalTables
     
-    private Dictionary<(int,int), MagicItemType> InitBaneDictionary()
+    private Dictionary<(int,int), MagicItemType> InitBaneWeapon()
     {
         if (baneDictionary != null) return baneDictionary;
         baneDictionary = new Dictionary<(int, int), MagicItemType>();
@@ -374,6 +380,25 @@ public class MagicItems
         baneDictionary.Add((12, 12), new MagicItemType(7, "Dragons"));
 
         return baneDictionary;
+    }
+
+    private Dictionary<(int, int), MagicItemType> InitDragonType()
+    {
+        if (dragonDictionary != null) return dragonDictionary;
+        dragonDictionary = new Dictionary<(int, int), MagicItemType>();
+
+        dragonDictionary.Add((1, 1), new MagicItemType(0, "Black"));
+        dragonDictionary.Add((2, 2), new MagicItemType(1, "Blue"));
+        dragonDictionary.Add((3, 4), new MagicItemType(2, "Green"));
+        dragonDictionary.Add((5, 6), new MagicItemType(3, "Red"));
+        dragonDictionary.Add((7, 8), new MagicItemType(4, "White"));
+        dragonDictionary.Add((9, 10), new MagicItemType(5, "Brass"));
+        dragonDictionary.Add((11, 11), new MagicItemType(6, "Bronze"));
+        dragonDictionary.Add((12, 12), new MagicItemType(7, "Copper"));
+        dragonDictionary.Add((12, 12), new MagicItemType(8, "Gold"));
+        dragonDictionary.Add((12, 12), new MagicItemType(9, "Silver"));
+
+        return dragonDictionary;
     }
     #endregion
     public struct MagicItemsTable
