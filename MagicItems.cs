@@ -166,17 +166,40 @@ public class MagicItems
         //TODO: delegate for +3 bane weapon roll
         specialSwordDictionary.Add((1, 8),  new MagicItem("Bane Sword", 13500, 4500, 
             "Normally +1 weapon but against designated foe a +3 weapon with extra 2d6 damage", 330, false, null, null, false, InitBaneWeapon()));
-        specialSwordDictionary.Add((9, 16), new MagicItem("Sword of Dancing", 12500, 4100, "", 331));
+        specialSwordDictionary.Add((9, 16), new MagicItem("Sword of Dancing", 12500, 4100, "TODO", 331));
         specialSwordDictionary.Add((17, 24), new MagicItem("Sword of Defending +4", 24500, 8100, 
             "Allows the wielder to transfer all or any of the sword's magical bonus to AC. Any bonus transfered is not added to the attack roll", 331));
         specialSwordDictionary.Add((25, 32), new MagicItem("Dragon Slayer +2/+4", 29000, 7250,
             "Normally +2 weapon, but against dragons of the rolled type +4 BtH and double damage", 331, false, null, null, false, InitDragonType()));
-        /*
-        specialSwordDictionary.Add((11, 30), new MagicItemType(1, "Broad Sword, Falchion"));
-        specialSwordDictionary.Add((31, 50), new MagicItemType(2, "Short Sword, Scimitar, Rapier"));
-        specialSwordDictionary.Add((51, 90), new MagicItemType(3, "Long Sword"));
-        specialSwordDictionary.Add((91, 100), new MagicItemType(3, "Two Handed Sword"));
-        */
+        specialSwordDictionary.Add((33, 36), new MagicItem("Featheredged Sword", 31075, 15000,
+    "+3 to hit and +1 to damage. A non modified roll of 18-20 severs a limb/hand/foot or head. Check table on page 331.", 331));
+        specialSwordDictionary.Add((37, 44), new MagicItem("Flaming Sword +2", 7750, 2000,
+    "+2 weapon. Deals +1d6 extra damage on hit, +2d6 extra damage on cold based creatures", 331));
+        specialSwordDictionary.Add((45, 52), new MagicItem("Frostbane/Frostbrand +3", 13725, 3000,
+"+3 icy weapon. Sheds light as a torch on 0F //TODO insert celcius temperature. 10 points of fire resistance each round. Deals double damage against fire-based creatures", 331));
+        specialSwordDictionary.Add((53, 56), new MagicItem("Holy Avenger +2/+5", 55000, 27000,
+"+2 weapon iron sword becomes +5 holy sword in the hands of a paladin. Deals double damage on targets of evil alignment. Provides bonus spell resistance equal to paladin's level + 5 to the wielder and anyone adjacent to her." +
+"enables wielder to use dispel magic (once per round as a normal action) at the class level of the paladin. It inflicts 2d20 points of damage to any evil aligned creature that attempts to wield it", 331));
+        specialSwordDictionary.Add((57, 60), new MagicItem("Sword of Life Stealing +2", 17000, 5600,
+"+2 ebony iron sword. Upon natural 20 weapon drains a level from its victim and grants 1d6 temporary hitpoints to the wielder. These temporary hit points last one day. Victim who survives" +
+"such a strike from a life stealer must make a CON save for each level lost. If successful, the level will return in 1d4 days or with a restoratio spell. If failed, the level is lost permanently and the victim's experience points are" +
+"" +
+"moved to the mid point of points requried for the previous level (as if struck by undead)", 331));
+        specialSwordDictionary.Add((61, 68), new MagicItem("Luck Blade +2", 21500, 7100,
+"Grants +1 luck bonus on all saves. The possessor gains the benefit of 'Good Fortune' usable once a day. The extraordinary ability allows any single roll to be re-rolled. Blade has a 5% chance to contain 1-3 wishes. When the last wish" +
+"is used the sword retains all of its other abilities and properties.", 331));
+        specialSwordDictionary.Add((69, 72), new MagicItem("Nine Lives Stealer +2", 8500, 2800,
+"+2 Sword. On a natural 20 to hit, the victim of this blade must make a CON save (CL 2) or be struck dead. It can do this nine times before the ability is lost. At that point the sword becomes a simple +2 Sword (with a hint of evil about it)." +
+"Any good creature who wields the sword suffers a -2 to their BtH. No spell can reverse this penalty. Only abjuring the weapon itself will negate the penalties.", 331));
+        specialSwordDictionary.Add((73, 80), new MagicItem("Sword of Puncturing +2", 12000, 3000,
+"+2 wounding sword allows the wielder to inflict 1d6 CON damage 3 times per day (by draining blood from its victim) with a successful hit.", 331));
+        specialSwordDictionary.Add((81, 88), new MagicItem("Sylvan Sword +3", 10000, 3000,
+"+3 blade whren used outdoors in a woodland climate, inflicts and additional 1d6 damage on a hit. If target is reduced to 0 hitpoints or less by a single strike, the wielder of the sword gains a free attack on another single target within melee range of the sword's wielder.", 331));
+        specialSwordDictionary.Add((89, 92), new MagicItem("Vorpal Sword +4", 38750, 19000,
+"+4 weapon. Has the unique ability to decapitate those it strikes. On a natural 20, the weapon severs the opponent's head (if it has one). Undeads, golems or headless creatures are not affected by decapitation. For vampires and most creatures, decapitation results in an instant death.", 331));
+        specialSwordDictionary.Add((93, 100), new MagicItem("Sword of Wounding +3", 16000, 5300,
+"Every time a creature is struck by this sword, in addition to normal damage the creature loses additional hit points from the blood loss equal to the maximum damage of the sword, including the +3 bonus." +
+"For example a long sword of wounding inflicts 11 points of blood loss damage. The victim suffers 1 point of damage per round until 11 points of daamge are dealt or a healing spell is cast to stop the loss.", 332));
     }
     private void InitItemBonus()
     {
@@ -288,7 +311,7 @@ public class MagicItems
         RollSpecialMiscWeapon();
         break;*/
             default:
-                RollMagicSword(true);
+                RollSpecialSword();
                 //Console.WriteLine("\nSomething went wrong");
                 break;
         }
@@ -311,6 +334,12 @@ public class MagicItems
     {
         RollMagicSword(false);
         InitSpecialSword();
+
+        int roll = CommonUtils.RollPercentage();
+        MagicItem swordsEntry = specialSwordDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        MagicItem sword = new MagicItem(swordsEntry.name,swordsEntry.gp,swordsEntry.xp,swordsEntry.description, swordsEntry.pageNumber, swordsEntry.isRollValueTable, swordsEntry.rollGpValue, swordsEntry.rollAmount, swordsEntry.isRollItemBonus, swordsEntry.optionalTable);
+        Console.WriteLine("Rolled " + roll + " for special sword type which is... ");
+        sword.PrintInfo();
     }
 
     private void RollMiscWeapon()
@@ -389,14 +418,14 @@ public class MagicItems
 
         dragonDictionary.Add((1, 1), new MagicItemType(0, "Black"));
         dragonDictionary.Add((2, 2), new MagicItemType(1, "Blue"));
-        dragonDictionary.Add((3, 4), new MagicItemType(2, "Green"));
-        dragonDictionary.Add((5, 6), new MagicItemType(3, "Red"));
-        dragonDictionary.Add((7, 8), new MagicItemType(4, "White"));
-        dragonDictionary.Add((9, 10), new MagicItemType(5, "Brass"));
-        dragonDictionary.Add((11, 11), new MagicItemType(6, "Bronze"));
-        dragonDictionary.Add((12, 12), new MagicItemType(7, "Copper"));
-        dragonDictionary.Add((12, 12), new MagicItemType(8, "Gold"));
-        dragonDictionary.Add((12, 12), new MagicItemType(9, "Silver"));
+        dragonDictionary.Add((3, 3), new MagicItemType(2, "Green"));
+        dragonDictionary.Add((4, 4), new MagicItemType(3, "Red"));
+        dragonDictionary.Add((5, 5), new MagicItemType(4, "White"));
+        dragonDictionary.Add((6, 6), new MagicItemType(5, "Brass"));
+        dragonDictionary.Add((7, 7), new MagicItemType(6, "Bronze"));
+        dragonDictionary.Add((8, 8), new MagicItemType(7, "Copper"));
+        dragonDictionary.Add((9, 9), new MagicItemType(8, "Gold"));
+        dragonDictionary.Add((10, 10), new MagicItemType(9, "Silver"));
 
         return dragonDictionary;
     }
