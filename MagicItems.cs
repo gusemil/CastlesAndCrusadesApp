@@ -14,6 +14,7 @@ public class MagicItems
     private Dictionary<(int, int), MagicItemType> magicSwordTypeDictionary = null;
     private Dictionary<(int, int), MagicItem> specialSwordDictionary = null;
     private Dictionary<(int, int), MagicItemType> magicMiscWeaponTypeDictionary = null;
+    private Dictionary<(int, int), MagicItem> specialMiscWeaponDictionary = null;
     private Dictionary<(int, int), ItemBonus> itemBonusDictionary = null;
 
     private Dictionary<(int, int), MagicItemType> baneDictionary = null;
@@ -178,7 +179,6 @@ public class MagicItems
         magicMiscWeaponTypeDictionary.Add((45, 48), new MagicItemType(10, "Dart"));
         magicMiscWeaponTypeDictionary.Add((49, 52), new MagicItemType(11, "Flail"));
         magicMiscWeaponTypeDictionary.Add((53, 56), new MagicItemType(12, "Halberd"));
-
         magicMiscWeaponTypeDictionary.Add((57, 60), new MagicItemType(2, "Hammer"));
         magicMiscWeaponTypeDictionary.Add((61, 64), new MagicItemType(2, "Javelin"));
         magicMiscWeaponTypeDictionary.Add((65, 68), new MagicItemType(2, "Lance"));
@@ -234,6 +234,30 @@ public class MagicItems
         specialSwordDictionary.Add((93, 100), new MagicItem("Sword of Wounding +3", 16000, 5300,
 "Every time a creature is struck by this sword, in addition to normal damage the creature loses additional hit points from the blood loss equal to the maximum damage of the sword, including the +3 bonus." +
 "For example a long sword of wounding inflicts 11 points of blood loss damage. The victim suffers 1 point of damage per round until 11 points of daamge are dealt or a healing spell is cast to stop the loss.", 332));
+    }
+
+    private void InitSpecialMiscWeapon()
+    {
+        if (specialMiscWeaponDictionary != null) return;
+        specialMiscWeaponDictionary = new Dictionary<(int, int), MagicItem>();
+
+        specialMiscWeaponDictionary.Add((1, 8),  new MagicItem("Bane Weapon", 13500, 4500, 
+            "Normally +1 weapon but against designated foe a +3 weapon with extra 2d6 damage", 330, false, null, null, false, InitBaneWeapon()));
+        specialMiscWeaponDictionary.Add((9, 11), new MagicItem("Club of Dagda (+X)", 10000, 4000, "User can declare a critical hit once per day. Can also heal 20 hitpoints a day. Roll table 4.3B (page 324) for weapon enhancement bonus", 333));
+        specialMiscWeaponDictionary.Add((12, 15), new MagicItem("Dagger of Venom +1", 4750, 1070, "+1 Dagger, can inject poison once per day", 333));
+        specialMiscWeaponDictionary.Add((16, 24), new MagicItem("Dwarven Thrower +2/+3", 18000, 6000, "+2 Warhammer, but +3 in hands of Dwarf. If thrown by a dwarf, the hammer gains the ability to return to its owner. Can be hurled a distance of 30ft. When hurled against giants it deals an extra 2d8 damage or an extra 1d8 against any other target. Unless obstructed, it always returns to its owner.", 333));
+        specialMiscWeaponDictionary.Add((25, 28), new MagicItem("Featheredged Axe +3", 31750, 15000, "Has bonus of +3 to hit and +1 damage, on a non-modified roll of 18-20 it severs a limb/hand/foot/head", 333));
+        specialMiscWeaponDictionary.Add((29, 36), new MagicItem("Javelin of Lightning", 4500, 450, "Javelin becomes a 5d6 Lightning Bolt when thrown (Victim makes a dex save for half damage). It is consumed in the attack.", 333));
+        specialMiscWeaponDictionary.Add((37, 40), new MagicItem("Mace (Hammer) of Disruption +3", 25500, 8500, "+3 weapon that deals double damage to undead. Upon successfu hit, the undead must make a physical save or be destroyed. Other undead near the target are affected as if turned by a 10th level Cleric (i.e. multiple lower hit dice undead can thus be destroyed with a single strike)", 333));
+        specialMiscWeaponDictionary.Add((41, 48), new MagicItem("Mace of Smiting +3", 17500, 5800, "+3 Heavy Mace has a +5 enchantment bonus against constructs, and any roll of natural 20 dealt to a construct shatters it, completely destroying its form. A natural 20 dealt to an extraplanar creature deals 4x damage.", 333));
+        specialMiscWeaponDictionary.Add((49, 56), new MagicItem("Mace of Terror +2", 8500, 2100, "On command this +2 mace causes the wielder's clothes and appearance to transform into an illusion of darkest horror. Living creatures in a 30 foot radius become panicked as if by a cause fear spell unless a successful charisma save is made.", 333));
+        specialMiscWeaponDictionary.Add((57, 60), new MagicItem("Nine Lives Stealer +2", 8500, 2800, "Read page 333 description", 333));
+        specialMiscWeaponDictionary.Add((61, 64), new MagicItem("Oathbow +2/+5", 25000, 5000, "Read page 333 description", 333));
+        specialMiscWeaponDictionary.Add((65, 68), new MagicItem("Slaying Arrow/Bolt", 9500, 2300, "+1 arrow or bolt magically attuned to a particular type or subtype of creature. If strikes such a creature target must make a constitution save or die instantly. The CK determines the particular type of creature it slays.", 333));
+        specialMiscWeaponDictionary.Add((69, 76), new MagicItem("Sleep Arrow/Bolt", 1250, 350, "+1 Arrow/bolt deals normal damage but converted to non-lethal damage. Also forces the target to make a wisdom save or fall asleep with a duration identical to the sleep spell.", 333));
+        specialMiscWeaponDictionary.Add((77, 84), new MagicItem("Sylvan Weapon +3", 10000, 3000, "If used in outdoors in a woodland climate, inflicts an additional 1d6 dmg on hit. If a target is reduced to 0 hitpoints or less by a single strike, wielder of the weapon gains a free attack on another single target within melee range of the weapon's wielder.", 333));
+        specialMiscWeaponDictionary.Add((85, 92), new MagicItem("Trident of Fish Command +1", 5000, 1200, "Allows the wielder to charm (as the spell) up to 14 HD of aquatic animals, two of which can't be more than 30ft apart. Can be used 3 times per day. Wielder can communicate with the animals as if Speak with animals spell. Animals making their saving throw are free of control.", 334));
+        specialMiscWeaponDictionary.Add((93, 100), new MagicItem("Weapon of Wounding +3", 16000, 5300, "Roll table 4.3D (pg. 325) for weapon type. Every time a creature is struck with this weapon, it loses additional hit points due blood loss equal to max damage of the weapon including the +3 bonus. This damage must be healed naturally. A healing spell with stop the blood loss but does not heal the damage.", 334));
     }
     private void InitItemBonus()
     {
@@ -340,16 +364,8 @@ public class MagicItems
             case 2:
                 RollMagicMiscWeapon(true);
                 break;
-            /*
-    case 2:
-        RollMiscWeapon();
-        break;
-    case 3:
-        RollSpecialMiscWeapon();
-        break;*/
-            default:
-                RollMagicMiscWeapon(true);
-                //Console.WriteLine("\nSomething went wrong");
+            case 3:
+                RollSpecialMiscWeapon();
                 break;
         }
     }
@@ -390,10 +406,15 @@ public class MagicItems
         miscWeapon.PrintInfo();
 
     }
-
     private void RollSpecialMiscWeapon()
     {
+        InitSpecialMiscWeapon();
 
+        int roll = CommonUtils.RollPercentage();
+        MagicItem specialMiscWeaponEntry = specialMiscWeaponDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        MagicItem specialMiscWeapon = new MagicItem(specialMiscWeaponEntry.name,specialMiscWeaponEntry.gp,specialMiscWeaponEntry.xp,specialMiscWeaponEntry.description, specialMiscWeaponEntry.pageNumber, specialMiscWeaponEntry.isRollValueTable, specialMiscWeaponEntry.rollGpValue, specialMiscWeaponEntry.rollAmount, specialMiscWeaponEntry.isRollItemBonus, specialMiscWeaponEntry.optionalTable);
+        Console.WriteLine("Rolled " + roll + " for special misc weapon type which is... ");
+        specialMiscWeapon.PrintInfo();
     }
 
     public ItemBonus RollItemBonus()
@@ -440,6 +461,7 @@ public class MagicItems
     
     private Dictionary<(int,int), MagicItemType> InitBaneWeapon()
     {
+        //TODO: Roll weapon type too?
         if (baneDictionary != null) return baneDictionary;
         baneDictionary = new Dictionary<(int, int), MagicItemType>();
 
