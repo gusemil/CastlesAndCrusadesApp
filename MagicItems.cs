@@ -13,6 +13,7 @@ public class MagicItems
     private Dictionary<(int, int), MagicItemType> magicWeaponTypeDictionary = null;
     private Dictionary<(int, int), MagicItemType> magicSwordTypeDictionary = null;
     private Dictionary<(int, int), MagicItem> specialSwordDictionary = null;
+    private Dictionary<(int, int), MagicItemType> magicMiscWeaponTypeDictionary = null;
     private Dictionary<(int, int), ItemBonus> itemBonusDictionary = null;
 
     private Dictionary<(int, int), MagicItemType> baneDictionary = null;
@@ -158,6 +159,39 @@ public class MagicItems
         magicSwordTypeDictionary.Add((91, 100), new MagicItemType(4, "Two Handed Sword"));
     }
 
+        private void InitMagicMiscWeaponType()
+    {
+        if (magicMiscWeaponTypeDictionary != null) return;
+        magicMiscWeaponTypeDictionary = new Dictionary<(int, int), MagicItemType>();
+
+        magicMiscWeaponTypeDictionary.Add((1, 2), new MagicItemType(0, "10 Arrow"));
+        magicMiscWeaponTypeDictionary.Add((3, 8), new MagicItemType(1, "Axe, Battle"));
+        magicMiscWeaponTypeDictionary.Add((9, 12), new MagicItemType(2, "Axe, hand/throwing"));
+        magicMiscWeaponTypeDictionary.Add((13, 16), new MagicItemType(2, "Axe, two-handed"));
+        magicMiscWeaponTypeDictionary.Add((17, 20), new MagicItemType(3, "Bardiche"));
+        magicMiscWeaponTypeDictionary.Add((21, 24), new MagicItemType(4, "10 Bolt"));
+        magicMiscWeaponTypeDictionary.Add((25, 28), new MagicItemType(5, "Bow"));
+        magicMiscWeaponTypeDictionary.Add((29, 32), new MagicItemType(6, "Club"));
+        magicMiscWeaponTypeDictionary.Add((33, 36), new MagicItemType(7, "Crossbow"));
+        magicMiscWeaponTypeDictionary.Add((37, 40), new MagicItemType(8, "Crowbill (Lucerne)"));
+        magicMiscWeaponTypeDictionary.Add((41, 44), new MagicItemType(9, "Dagger"));
+        magicMiscWeaponTypeDictionary.Add((45, 48), new MagicItemType(10, "Dart"));
+        magicMiscWeaponTypeDictionary.Add((49, 52), new MagicItemType(11, "Flail"));
+        magicMiscWeaponTypeDictionary.Add((53, 56), new MagicItemType(12, "Halberd"));
+
+        magicMiscWeaponTypeDictionary.Add((57, 60), new MagicItemType(2, "Hammer"));
+        magicMiscWeaponTypeDictionary.Add((61, 64), new MagicItemType(2, "Javelin"));
+        magicMiscWeaponTypeDictionary.Add((65, 68), new MagicItemType(2, "Lance"));
+        magicMiscWeaponTypeDictionary.Add((69, 72), new MagicItemType(2, "Mace"));
+        magicMiscWeaponTypeDictionary.Add((73, 76), new MagicItemType(2, "Morningstar"));
+        magicMiscWeaponTypeDictionary.Add((77, 80), new MagicItemType(2, "Pole arm"));
+        magicMiscWeaponTypeDictionary.Add((81, 84), new MagicItemType(2, "Sling"));
+        magicMiscWeaponTypeDictionary.Add((85, 88), new MagicItemType(2, "Spear"));
+        magicMiscWeaponTypeDictionary.Add((89, 92), new MagicItemType(2, "Staff"));
+        magicMiscWeaponTypeDictionary.Add((93, 96), new MagicItemType(2, "Trident"));
+        magicMiscWeaponTypeDictionary.Add((97, 100), new MagicItemType(2, "Whip"));
+    }
+
     private void InitSpecialSword()
     {
         if (specialSwordDictionary != null) return;
@@ -187,7 +221,7 @@ public class MagicItems
 "moved to the mid point of points requried for the previous level (as if struck by undead)", 331));
         specialSwordDictionary.Add((61, 68), new MagicItem("Luck Blade +2", 21500, 7100,
 "Grants +1 luck bonus on all saves. The possessor gains the benefit of 'Good Fortune' usable once a day. The extraordinary ability allows any single roll to be re-rolled. Blade has a 5% chance to contain 1-3 wishes. When the last wish" +
-"is used the sword retains all of its other abilities and properties.", 331));
+"is used the sword retains all of its other abilities and properties.", 331)); //TODO implement an roll to determine wish chance and amount of wishes?
         specialSwordDictionary.Add((69, 72), new MagicItem("Nine Lives Stealer +2", 8500, 2800,
 "+2 Sword. On a natural 20 to hit, the victim of this blade must make a CON save (CL 2) or be struck dead. It can do this nine times before the ability is lost. At that point the sword becomes a simple +2 Sword (with a hint of evil about it)." +
 "Any good creature who wields the sword suffers a -2 to their BtH. No spell can reverse this penalty. Only abjuring the weapon itself will negate the penalties.", 331));
@@ -303,6 +337,9 @@ public class MagicItems
             case 1:
                 RollSpecialSword();
                 break;
+            case 2:
+                RollMagicMiscWeapon(true);
+                break;
             /*
     case 2:
         RollMiscWeapon();
@@ -311,7 +348,7 @@ public class MagicItems
         RollSpecialMiscWeapon();
         break;*/
             default:
-                RollSpecialSword();
+                RollMagicMiscWeapon(true);
                 //Console.WriteLine("\nSomething went wrong");
                 break;
         }
@@ -342,8 +379,15 @@ public class MagicItems
         sword.PrintInfo();
     }
 
-    private void RollMiscWeapon()
+    private void RollMagicMiscWeapon(bool rollWeaponBonus)
     {
+        InitMagicMiscWeaponType();
+        int roll = CommonUtils.RollPercentage();
+        MagicItemType miscWeaponEntry = magicMiscWeaponTypeDictionary.Where(x => roll >= x.Key.Item1 && roll <= x.Key.Item2).FirstOrDefault().Value;
+        MagicItem miscWeapon = new MagicItem(miscWeaponEntry.subTableDescription, 0, 0, "", 0, false, null, null, true);
+        if (rollWeaponBonus) miscWeapon.RollItemBonus(this);
+        Console.WriteLine("Rolled " + roll + " for misc weapon type which is... ");
+        miscWeapon.PrintInfo();
 
     }
 

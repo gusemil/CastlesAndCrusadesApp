@@ -13,6 +13,7 @@ public class Program
         int treasureLevel = 0;
         const int MAX_TREASURE_LEVEL = 18;
         Console.WriteLine("Welcome, Castle Keeper!");
+
         while (mainLoop)
         {
             Console.WriteLine("\n\nDo you want to choose or roll treasure level? C/R");
